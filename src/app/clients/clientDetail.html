@@ -91,9 +91,16 @@
                 </uib-tab>
                 <uib-tab index="2" heading="Health and Disability">
                   <br>
-                  <div ng-repeat="cdis in Client.clientDisabilities">
-                    {{cdis}}
-                  </div>
+                  <table class="table table-striped">
+                    <thead>
+                      <th>Disability</th><th>Response</th><th>Noted</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="cdis in Client.clientDisabilities">
+                        <td>{{cdis.disability}}</td><td>{{cdis.disabilityResponse}}</td><td>{{cdis.creation_date | date: shortDate}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </uib-tab>
                 <uib-tab index="3" heading="Domestic Violence">
                   <br><br><br><br>
