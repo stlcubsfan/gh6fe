@@ -6,7 +6,11 @@ angular
     controllerAs: 'Client'
   });
 
-function clientDetail($stateParams, clientsApi, disabilitiesApi, disabilityResponsesApi, clientDisabilitiesApi) {
+function clientDetail($stateParams, clientsApi, 
+    disabilitiesApi, disabilityResponsesApi, clientDisabilitiesApi,
+    clientEducationEmploymentsApi, clientHealthApi, clientIncomesApi,
+    educationLevelsApi, employmentTypesApi, healthStatusesApi,
+    notEmployedReasonsApi, noYesApi, schoolStatusesApi, whenoccursApi) {
     const cd = this;
 
     init();
@@ -25,6 +29,47 @@ function clientDetail($stateParams, clientsApi, disabilitiesApi, disabilityRespo
                     });
                 });
             });
+
+            clientEducationEmploymentsApi.all(cd.client.id).then(function (cee) {
+                cd.clientEducationEmployment = cee.data;
+                _.each(cd.clientEducationEmployment, function (ce) {
+                    educationLevelsApi.one(ce.educationlevelid).then(function (res) {
+                        ce.educationLevel = res.data.name;
+                    });
+                    schoolStatusesApi.one(ce.schoolstatusid).then(function (res) {
+                        ce.schoolStatus = res.data.name;
+                    });  
+                    employmentTypesApi.one(ce.employmenttypeid).then(function (res) {
+                        ce.employmentType = res.data.name;
+                    });                  
+                    notEmployedReasonsApi.one(ce.notemployedreasonid).then(function (res) {
+                        ce.notEmployedReason = res.data.name;
+                    });                                        
+                })
+            });
+
+            clientHealthApi.all(cd.client.id).then(function (ch) {
+                cd.clientHealth = ch.data;
+                _.each(cd.clientHealth, function(c) {
+                    healthStatusesApi.one(c.generalhealthstatus).then(function (n) {
+                        c.generalHealth = n.data.name;
+                    });
+                    healthStatusesApi.one(c.mentalhealthstatus).then(function (n) {
+                        c.mentalHealth = n.data.name;
+                    });                    
+                    whenoccursApi.one(c.whenoccured).then(function (w) {
+                        c.dvWhenOccured = w.data.name;
+                    });
+                    noYesApi.one(c.pregnancystatus).then(function (n) {
+                        c.pregnant = n.data.name;
+                    }); 
+                });
+            });
+
+            clientIncomesApi.all(cd.client.id).then(function (ci) {
+                cd.clientIncomes = ci.data;
+            });
+
         });
 
         disabilitiesApi.all().then(function (response) {
