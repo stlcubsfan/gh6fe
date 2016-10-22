@@ -14,21 +14,18 @@ function openBedsCtrl($stateParams, agencyApi, nearMeMiles, $http, gMapsApiKey) 
   function init() {
     vm.totalBedsNearMe = null;
 
-    agencyApi.all().then(agencies => {
-      vm.agencies = agencies.data;
-      vm.totalBeds = mapReduceBedsAvailable(vm.agencies);
-      agencyApi.getCurrent().then(agency => {
-        vm.currentAgency = agency;
+    agencyApi.getCurrent().then(agency => {
+      vm.currentAgency = agency;
+      vm.totalBeds = vm.currentAgency.beds_available;
 
-        const params = {
-          xpos: vm.currentAgency.pos.x,
-          ypos: vm.currentAgency.pos.y,
-          range: nearMeMiles
-        };
+      const params = {
+        xpos: vm.currentAgency.pos.x,
+        ypos: vm.currentAgency.pos.y,
+        range: nearMeMiles
+      };
 
-        agencyApi.getAgenciesNearMe(params).then(agencies => {
-          vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
-        });
+      agencyApi.getAgenciesNearMe(params).then(agencies => {
+        vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
       });
     });
   }
