@@ -6,7 +6,7 @@ angular
     controllerAs: 'Client'
   });
 
-function clientDetail($stateParams, clientsApi, disabilitiesApi, clientDisabilitiesApi) {
+function clientDetail($stateParams, clientsApi, disabilitiesApi, disabilityResponsesApi, clientDisabilitiesApi) {
     const cd = this;
 
     init();
@@ -16,6 +16,14 @@ function clientDetail($stateParams, clientsApi, disabilitiesApi, clientDisabilit
             cd.client = c.data;
             clientDisabilitiesApi.all(cd.client.id).then(function (cds) {
                 cd.clientDisabilities = cds.data;
+                _.each(cd.clientDisabilities, function (cd) {
+                    disabilitiesApi.one(cd.disabilityid).then(function (res) {
+                        cd.disability = res.data.name;
+                    });
+                    disabilityResponsesApi.one(cd.disabilityresponseid).then(function(res) {
+                        cd.disabilityResponse = res.data.name;
+                    });
+                });
             });
         });
 
