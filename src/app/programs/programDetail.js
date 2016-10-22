@@ -15,5 +15,11 @@ function makeProgramDetail(programsApi, $stateParams) {
       programsApi.getProgram($stateParams.programId).then(function (response) {
         vm.program = response.data;
       });
+
+      programsApi.getCategories().then(function (response) {
+        vm.allCategories = response.data;
+
+        console.log(vm.allCategories);
+      });
     }
 }
