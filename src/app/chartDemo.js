@@ -6,7 +6,7 @@ function makeChartDemo() {
           //This is the Main Highcharts chart config. Any Highchart options are valid here.
           //will be overriden by values specified below.
           chart: {
-              type: 'line'
+              type: 'column'
           },
           tooltip: {
               style: {
@@ -39,7 +39,6 @@ function makeChartDemo() {
       useHighStocks: false,
       //size (optional) if left out the chart will default to size of the div or something sensible.
       size: {
-       width: 400,
        height: 300
       },
       //function (optional)
