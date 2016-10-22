@@ -77,7 +77,8 @@
                   <th>Joined</th>
                   <th>Status</th>
                 </tr>
-                <tr ng-repeat="client in ProgramDetail.clients | filter: ProgramDetail.clientSearchTerm">
+                <tr ng-repeat="client in ProgramDetail.clients | filter: ProgramDetail.clientSearchTerm"
+                    ui-sref="clientDetail({clientId: client.id})">
                   <td>{{ client.first_name }} {{ client.last_name }}</td>
                   <td>{{ client.creation_date | date }}</td>
                   <td><span class="label label-success">Approved</span></td>

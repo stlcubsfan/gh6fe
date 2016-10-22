@@ -19,13 +19,13 @@
         <div class="col-md-6" ng-repeat="program in Programs.programs">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title"><a ui-sref="programDetail({ programId: program.id })">{{ program.title }}</a></h3>
+              <h3 class="box-title truncate"><a ui-sref="programDetail({ programId: program.id })">{{ program.title }}</a></h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#">Active Clients <span class="pull-right badge bg-blue">31</span></a></li>
-                <li><a href="#">Success Stories <span class="pull-right badge bg-aqua">5</span></a></li>
-                <li><a href="#">Leads <span class="pull-right badge bg-green">12</span></a></li>
+                <li><a>Active Clients <span class="pull-right badge bg-aqua">31</span></a></li>
+                <li><a>Success Stories <span class="pull-right badge bg-green">5</span></a></li>
+                <li><a>Leads <span class="pull-right badge bg-grey">12</span></a></li>
               </ul>
             </div>
           </div>
