@@ -3,7 +3,7 @@ angular
   .factory('clientDisabilitiesApi', clientDisabilitiesApi);
 
 function clientDisabilitiesApi($http) {
-    var baseApi = "http://gh6api.herokuapp.com/client/";
+    var baseApi = "http://gh6api.herokuapp.com/clients/";
     return {
         all: getDisabilities,
         one: getDisability,
@@ -12,18 +12,18 @@ function clientDisabilitiesApi($http) {
     }
 
     function getDisabilities(clientId) {
-        return $http.get(baseApi + '/' + clientId + 'disabilities');
+        return $http.get(baseApi + clientId + '/disabilities');
     }
 
     function getDisability(clientId, id) {
-        return $http.get(baseApi + '/' + clientId, + '/disabilities/' + id);
+        return $http.get(baseApi + clientId, + '/disabilities/' + id);
     }
 
     function saveDisability(disability) {
-        return $http.post(baseApi + '/' + clientId + '/disabilities');
+        return $http.post(baseApi + clientId + '/disabilities');
     }
 
     function updateDisability(disability) {
-        return $http.put(baseApi + '/' + clientId + '/disabilities/' + disability.clientid);
+        return $http.put(baseApi + clientId + '/disabilities/' + disability.clientid);
     }
 }

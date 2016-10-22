@@ -6,7 +6,7 @@ angular
     controllerAs: 'Client'
   });
 
-function clientDetail($stateParams, clientsApi, disabilitiesApi) {
+function clientDetail($stateParams, clientsApi, disabilitiesApi, clientDisabilitiesApi) {
     const cd = this;
 
     init();
