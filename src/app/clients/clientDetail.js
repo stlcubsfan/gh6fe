@@ -14,6 +14,9 @@ function clientDetail($stateParams, clientsApi, disabilitiesApi) {
     function init() {
         clientsApi.one($stateParams.clientId).then(function (c) {
             cd.client = c.data;
+            clientDisabilitiesApi.all(cd.client.id).then(function (cds) {
+                cd.clientDisabilities = cds.data;
+            });
         });
 
         disabilitiesApi.all().then(function (response) {
