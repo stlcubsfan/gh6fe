@@ -6,8 +6,9 @@
     <title>FountainJS</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
-  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <!-- build:css({.tmp,src}) styles/vendor.css -->
     <!-- bower:css -->
     <!-- run `gulp inject` to automatically populate bower styles dependencies -->
@@ -20,8 +21,17 @@
   </head>
 
 
-  <body ng-app="app">
-    <ui-view></ui-view>
+  <body ng-app="app" class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <ng-include src="'app/header.html'"></ng-include>
+
+      <ng-include src="'app/sidebar.html'"></ng-include>
+
+      <ui-view></ui-view>
+
+      <ng-include src="'app/footer.html'"></ng-include>
+    </div>
   </body>
 
   <!-- build:js({.tmp,src}) scripts/vendor.js -->
