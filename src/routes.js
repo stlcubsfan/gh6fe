@@ -20,6 +20,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     });
 
   $stateProvider
+    .state('clientDetail', {
+      url: '/clients/:clientId',
+      component: 'clientDetail'
+    });
+
+  $stateProvider
     .state('programs', {
       url: '/programs',
       component: 'programs'
