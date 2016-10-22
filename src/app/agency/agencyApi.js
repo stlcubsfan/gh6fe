@@ -2,8 +2,8 @@ angular
   .module('app')
   .factory('agencyApi', agencyApi);
 
-function agencyApi($http) {
-    var baseApi = 'http://gh6api.herokuapp.com/agencies',
+function agencyApi($http, restBaseApi) {
+    var baseApi = `${restBaseApi}/agencies`,
         STORAGE_KEY = 'labreAgency';
 
     return {
