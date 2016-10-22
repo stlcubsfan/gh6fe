@@ -22,7 +22,5 @@ function clientDetail($stateParams, clientsApi, disabilitiesApi) {
         disabilitiesApi.all().then(function (response) {
             cd.disabilities = response.data;
         });
-
-        
     }
 }
