@@ -11,15 +11,10 @@ function disabilitiesApi($http, $q) {
     }
 
     function getDisabilities() {
-        if (disabilities.length > 0) {
-            return $q.resolve(disabilities);
-        } else {
-            return $http.get(baseApi);
-        }
-        
+        return $http.get(baseApi, { cache: true});
     }
 
     function getDisability(id) {
-        return $http.get(baseApi + '/' + id);
+        return $http.get(baseApi + '/' + id, { cache: true});
     }
 }
