@@ -69,8 +69,12 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <input class="no-input" placeholder="search" ng-model="Clients.searchTerm">
+      </div>
+
       <div class="row">
-        <div class="col-md-4" ng-repeat="client in Clients.clients">
+        <div class="col-md-4" ng-repeat="client in Clients.clients | filter: Clients.searchTerm">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title"><a ui-sref="clientDetail({clientId: client.id})">{{ client.first_name }} {{ client.last_name }}</a></h3>
