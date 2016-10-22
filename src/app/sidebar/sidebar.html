@@ -1,0 +1,70 @@
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="/img/org-logo.png" class="img-circle" alt="Org Image">
+      </div>
+      <div class="pull-left info">
+
+        <div uib-dropdown is-open="status.isopen">
+          <a id="orgSelector" class="clickable" uib-dropdown-toggle>
+            {{ Sidebar.currentAgency.name }} <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="orgSelector">
+            <li role="menuitem" ng-repeat="agency in Sidebar.allAgencies">
+              <a class="clickable" ng-click="Sidebar.setCurrenctAgency(agency)">{{ agency.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <!-- search form -->
+    <form action="#" method="get" class="sidebar-form">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+      </div>
+    </form>
+    <!-- /.search form -->
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+      <li class="header">MAIN NAVIGATION</li>
+      <li class="treeview clickable" ui-sref-active="active" ui-sref="home">
+        <a>
+          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="treeview clickable" ui-sref-active="active" ui-sref="clients">
+        <a>
+          <i class="fa fa-user"></i>
+          <span>Clients</span>
+        </a>
+      </li>
+
+      <li class="treeview clickable" ui-sref="programs" ui-sref-active="active">
+        <a>
+          <i class="fa fa-briefcase"></i>
+          <span>Programs</span>
+        </a>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-pie-chart"></i>
+          <span>Link</span>
+        </a>
+      </li>
+
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>
