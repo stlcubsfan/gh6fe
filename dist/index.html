@@ -6,20 +6,30 @@
     <title>FountainJS</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png">
-  
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
     
 
-    <link rel="stylesheet" href="styles/app-4765d95b33.css">
+    <link rel="stylesheet" href="styles/app-9758c5345e.css">
   </head>
 
 
-  <body ng-app="app">
-    <ui-view></ui-view>
+  <body ng-app="app" class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <ng-include src="'app/header.html'"></ng-include>
+
+      <ng-include src="'app/sidebar.html'"></ng-include>
+
+      <ui-view></ui-view>
+
+      <ng-include src="'app/footer.html'"></ng-include>
+    </div>
   </body>
 
-  <script src="scripts/vendor-4f783951f0.js"></script>
+  <script src="scripts/vendor-80120390e0.js"></script>
 
-  <script src="scripts/app-ab7e3a8354.js"></script>
+  <script src="scripts/app-7b44e718e3.js"></script>
 </html>
 
