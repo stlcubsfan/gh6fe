@@ -6,29 +6,29 @@ angular
     controllerAs: 'openBeds'
   });
 
-function openBedsCtrl($stateParams, agenciesApi, nearMeMiles, $http, gMapsApiKey) {
+function openBedsCtrl($stateParams, agencyApi, nearMeMiles, $http, gMapsApiKey) {
   const vm = this;
 
   init();
 
   function init() {
-    agenciesApi.getAgencies().then(agencies => {
+    vm.totalBedsNearMe = null;
+
+    agencyApi.all().then(agencies => {
       vm.agencies = agencies.data;
       vm.totalBeds = mapReduceBedsAvailable(vm.agencies);
-      vm.currentAgency = vm.agencies.filter( agency => {
-        return agency.id === 1;
-      });
+      agencyApi.getCurrent().then(agency => {
+        vm.currentAgency = agency;
 
-      const params = {
-        xpos: 38.6334014,
-        ypos: -90.197793,
-        range: nearMeMiles
-      };
+        const params = {
+          xpos: vm.currentAgency.pos.x,
+          ypos: vm.currentAgency.pos.y,
+          range: nearMeMiles
+        };
 
-      console.log(params);
-      agenciesApi.getAgenciesNearMe(params).then(agencies => {
-        console.log(agencies);
-        vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
+        agencyApi.getAgenciesNearMe(params).then(agencies => {
+          vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
+        });
       });
     });
   }

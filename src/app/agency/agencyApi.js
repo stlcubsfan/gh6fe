@@ -10,7 +10,8 @@ function agencyApi($http) {
         all: getAgencies,
         one: getAgency,
         setCurrent: setCurrent,
-        getCurrent: getCurrent
+        getCurrent: getCurrent,
+        getAgenciesNearMe: getAgenciesNearMe
     }
 
     function getAgencies() {
@@ -37,5 +38,11 @@ function agencyApi($http) {
             return _.find(response.data, {id: parseInt(current)});
         });
 
+    }
+
+    function getAgenciesNearMe(params) {
+      return $http.get(baseApi, {
+        params: params
+      });
     }
 }
