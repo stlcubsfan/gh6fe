@@ -6,19 +6,22 @@ angular
     controllerAs: 'openBeds'
   });
 
-function openBedsCtrl($stateParams, agenciesApi, nearMeMiles) {
+function openBedsCtrl($stateParams, agenciesApi, nearMeMiles, $http, gMapsApiKey) {
   const vm = this;
 
   init();
 
   function init() {
     agenciesApi.getAgencies().then(agencies => {
-      vm.totalBeds = mapReduceBedsAvailable(agencies.data);
-    });
-    navigator.geolocation.getCurrentPosition(pos => {
+      vm.agencies = agencies.data;
+      vm.totalBeds = mapReduceBedsAvailable(vm.agencies);
+      vm.currentAgency = vm.agencies.filter( agency => {
+        return agency.id === 1;
+      });
+
       const params = {
-        ypos: pos.coords.latitude,
-        xpos: pos.coords.longitude,
+        xpos: 38.6334014,
+        ypos: -90.197793,
         range: nearMeMiles
       };
 
