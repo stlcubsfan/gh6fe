@@ -2,8 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Blank page
-        <small>it all starts here</small>
+        Dashboard
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -14,6 +13,18 @@
 
     <!-- Main content -->
     <section class="content">
+
+      <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
+
+      <br><br>
+
+      <highchart id="chart1" config="Dashboard.chartConfig"></highchart>
+
+
+      <div class="row">
+        <ng-include class="col-md-8" src="'app/dashboard/dashboard-activity.html'"></ng-include>
+
+      </div>
 
       <!-- Default box -->
       <div class="box">
