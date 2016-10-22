@@ -1,9 +1,11 @@
 <div class="col-md-4 col-sm-6 col-xs-12">
-  <div class="info-box" ng-class="{'bg-green': openBeds.totalBeds > 5, 'bg-yellow': openBeds.totalBeds <= 5 && openBeds.totalBeds > 0, 'bg-red': openBeds.totalBeds === 0}">
+  <div class="info-box" ui-sref="reserveBed()" ng-class="{'bg-green': openBeds.totalBeds > 5, 'bg-yellow': openBeds.totalBeds <= 5 && openBeds.totalBeds > 0, 'bg-red': openBeds.totalBeds === 0}">
     <span class="info-box-icon"><i class="fa fa-bed"></i></span>
     <div class="info-box-content">
-      <span class="info-box-text">Open Beds</span>
-      <span class="info-box-number">{{openBeds.totalBeds}}</span>
+      <span class="info-box-text">Reserve a Room</span>
+      <span class="info-box-number">
+        {{openBeds.totalBeds}} Open Beds
+      </span>
 
       <div class="progress">
         <div class="progress-bar" style="width: 80%"></div>
