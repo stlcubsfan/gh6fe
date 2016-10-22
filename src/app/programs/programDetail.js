@@ -18,8 +18,11 @@ function makeProgramDetail(programsApi, $stateParams) {
 
       programsApi.getCategories().then(function (response) {
         vm.allCategories = response.data;
+      });
 
-        console.log(vm.allCategories);
+      programsApi.getClientsForProgram($stateParams.programsApi).then(function (response) {
+        console.log(response);
+        vm.clients = response.data;
       });
     }
 }

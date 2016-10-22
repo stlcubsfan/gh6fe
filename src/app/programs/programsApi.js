@@ -2,7 +2,7 @@ angular
   .module('app')
   .factory('programsApi', makeProgramsApi);
 
-function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories) {
+function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories, clientsApi) {
     let programsApi = {};
 
     programsApi.getPrograms = function () {
@@ -24,6 +24,11 @@ function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories) {
             data: dummyProgramCategories.categories
         });
     };
+
+    programsApi.getClientsForProgram = function (programId) {
+        return clientsApi.all();
+    };
+
 
     return programsApi;
 }
