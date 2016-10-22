@@ -3,9 +3,17 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "^1.5.0",
+    "angularjs-geolocation": "git://github.com/arunisrael/angularjs-geolocation.git#^0.1.1",
+    "angular-google-maps": "^2.4.0",
+    "angular-sanitize": "^1.5.8",
+    "angular-ui-bootstrap": "^2.2.0",
     "angular-ui-router": "1.0.0-beta.1",
+    "angular-ui-select": "^0.19.5",
     "bootstrap": "^3.3.7",
-    "lodash": "^4.16.4"
+    "highcharts": "^5.0.0",
+    "highcharts-ng": "^0.0.13",
+    "lodash": "^4.16.4",
+    "select2": "^4.0.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0"
