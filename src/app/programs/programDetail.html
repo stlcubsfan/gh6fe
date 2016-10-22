@@ -16,8 +16,86 @@
     <section class="content">
 
       <div class="row">
+        <div class="col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Active Clients</span>
+              <span class="info-box-number">5</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Success Stories</span>
+              <span class="info-box-number">30</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-box">
+            <span class="info-box-icon bg-grey"><i class="fa fa-flag-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Leads</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- clients table -->
         <div class="col-md-8">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Clients</h3>
+
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right no-input" placeholder="Search" ng-model="ProgramDetail.clientSearchTerm">
+                </div>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody><tr>
+                  <th>Client Name</th>
+                  <th>Joined</th>
+                  <th>Status</th>
+                </tr>
+                <tr ng-repeat="client in ProgramDetail.clients | filter: ProgramDetail.clientSearchTerm">
+                  <td>{{ client.first_name }} {{ client.last_name }}</td>
+                  <td>{{ client.creation_date | date }}</td>
+                  <td><span class="label label-success">Approved</span></td>
+                </tr>
+              </tbody></table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
           <div class="box box-default">
+            <div class="box-header with-border">
+              <i class="fa fa-cog"></i>
+
+              <h3 class="box-title">Settings</h3>
+            </div>
 
             <div class="box-body">
 
