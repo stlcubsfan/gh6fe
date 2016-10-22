@@ -1,0 +1,116 @@
+<div class="box box-default">
+  <div class="box-header">
+    <h3 class="box-title">Check In</h3>
+  </div>
+
+  <div class="box-body">
+    <div class="form-group">
+      <label>Beds Needed</label>
+      <br>
+      <input type="number" class="form-control" ng-model="CheckIn.newCheckIn.bedsNeeded" placeholder="Ex: 1">
+    </div>
+
+    <section ng-if="!CheckIn.isCreatingNewClient">
+
+      <ui-select ng-model="CheckIn.newCheckinClient"
+                 theme="select2"
+                 reset-search-input="false"
+                 style="width: 100%"
+                 append-to-body="true"
+                 limit="5">
+
+        <ui-select-match placeholder="Client Name">{{$select.selected.first_name}} {{$select.selected.last_name}}</ui-select-match>
+        <ui-select-choices repeat="client in CheckIn.clients | filter: $select.search | limitTo: $select.limit">
+
+          <div>{{ client.first_name }} {{ client.last_name }}</div>
+        </ui-select-choices>
+      </ui-select>
+
+      <div class="strike-through-line">
+        <span>OR</span>
+      </div>
+
+      <button class="btn btn-primary btn-block" ng-click="CheckIn.isCreatingNewClient = true">Create New Client</button>
+
+    </section>
+
+    <section ng-if="CheckIn.isCreatingNewClient">
+      <div class="form-group">
+        <label>First Name</label>
+        <input class="form-control" ng-model="CheckIn.newCheckIn.first_name">
+      </div>
+
+      <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control" ng-model="CheckIn.newCheckIn.last_name">
+      </div>
+
+      <label>Ethnicity</label>
+      <ui-select ng-model="CheckIn.ethnicitySelections"
+                 theme="select2"
+                 multiple="true"
+                 reset-search-input="false"
+                 style="width: 100%"
+                 append-to-body="true">
+
+        <ui-select-match placeholder="Ethnicity">{{$item.title}}</ui-select-match>
+        <ui-select-choices repeat="ethnicity.title as ethnicity in CheckIn.availableEthnicities">
+
+          <div ng-bind-html="ethnicity.title | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+
+      <div class="form-group">
+        <br>
+        <label>Gender</label>
+        <br>
+        <select ng-model="CheckIn.newCheckIn.male">
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Veteran Status</label>
+        <br>
+        <select ng-model="CheckIn.newCheckIn.veteran_status">
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <section ng-if="CheckIn.newCheckIn.veteran_status && CheckIn.newCheckIn.veteran_status != 'none'">
+        <div class="form-group">
+          <label>Service Start</label>
+          <br>
+          <input type="date" ng-model="CheckIn.newCheckIn.service_start">
+        </div>
+
+        <div class="form-group" ng-if="CheckIn.newCheckIn.veteran_status === 'inactive'">
+          <label>Service End</label>
+          <br>
+          <input type="date" ng-model="CheckIn.newCheckIn.service_end">
+        </div>
+
+        <div class="form-group">
+          <label>Discharge Status</label>
+          <br>
+
+          <select ng-model="discharge_status">
+            <option value="Honorable">Honorable</option>
+            <option value="Dishonorable">Dishonorable</option>
+          </select>
+        </div>
+      </section>
+    </section>
+
+    <section class="form-actions" ng-if="CheckIn.newCheckinClient || CheckIn.isCreatingNewClient">
+      <hr>
+
+      <button class="btn btn-primary pull-right" ng-click="CheckIn.createClient()">Save</button>
+      <button class="btn btn-link pull-left" ng-click="CheckIn.isCreatingNewClient = false">Use Existing Client</button>
+    </section>
+  </div>
+</div>
+

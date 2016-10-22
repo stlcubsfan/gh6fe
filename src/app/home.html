@@ -13,13 +13,20 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
-
       <br><br>
 
-      <highchart style="width: 100%;" id="chart1" config="Dashboard.chartConfig"></highchart>
+      <div class="row">
+        <div class="col-md-8">
+          <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
 
+          <highchart style="width: 100%;" id="chart1" config="Dashboard.chartConfig"></highchart>
+        </div>
+
+        <div class="col-md-4">
+          <check-in></check-in>
+          <!-- <ng-include src="'app/clients/checkIn.html'" ng-controller="checkIn as checkIn"></ng-include> -->
+        </div>
+      </div>
 
       <!--
       <div class="row">
