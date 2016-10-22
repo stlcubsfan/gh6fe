@@ -1,0 +1,19 @@
+<div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="info-box bg-green">
+    <span class="info-box-icon"><i class="fa fa-bed"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Open Beds</span>
+      <span class="info-box-number">{{openBeds.totalBeds}}</span>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 80%"></div>
+      </div>
+          <span class="progress-description">
+            <a ng-if="openBeds.totalBedsNearMe !== null" href="#">{{openBeds.totalBedsNearMe}} Nearby</a>
+            <span ng-if="openBeds.totalBedsNearMe === null"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Searching for beds nearby...</span>
+          </span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+</div>

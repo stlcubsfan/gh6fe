@@ -2,15 +2,16 @@ angular
   .module('app')
   .factory('agencyApi', agencyApi);
 
-function agencyApi($http) {
-    var baseApi = 'http://gh6api.herokuapp.com/agencies',
+function agencyApi($http, restBaseApi) {
+    var baseApi = `${restBaseApi}/agencies`,
         STORAGE_KEY = 'labreAgency';
 
     return {
         all: getAgencies,
         one: getAgency,
         setCurrent: setCurrent,
-        getCurrent: getCurrent
+        getCurrent: getCurrent,
+        getAgenciesNearMe: getAgenciesNearMe
     }
 
     function getAgencies() {
@@ -37,5 +38,11 @@ function agencyApi($http) {
             return _.find(response.data, {id: parseInt(current)});
         });
 
+    }
+
+    function getAgenciesNearMe(params) {
+      return $http.get(baseApi, {
+        params: params
+      });
     }
 }
