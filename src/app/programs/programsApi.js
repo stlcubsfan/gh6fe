@@ -2,7 +2,7 @@ angular
   .module('app')
   .factory('programsApi', makeProgramsApi);
 
-function makeProgramsApi($http, $q, dummyPrograms) {
+function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories) {
     let programsApi = {};
 
     programsApi.getPrograms = function () {
@@ -16,6 +16,12 @@ function makeProgramsApi($http, $q, dummyPrograms) {
             return {
                 data: _.find(response.data, {id: parseInt(id)})
             }
+        });
+    };
+
+    programsApi.getCategories = function (id) {
+        return $q.when({
+            data: dummyProgramCategories.categories
         });
     };
 
