@@ -1,2 +1,2 @@
 angular
-  .module('app', ['ui.router', 'ui.bootstrap', 'highcharts-ng', 'ui.select', 'ngSanitize']);
+  .module('app', ['ui.router', 'highcharts-ng', 'ui.select', 'ngSanitize']);
