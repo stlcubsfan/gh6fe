@@ -1,6 +1,6 @@
 angular
   .module('app')
-  .component('app', {
+  .component('home', {
     templateUrl: 'app/home.html',
     controller() {
       this.hello = 'Hello World!';
