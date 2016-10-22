@@ -21,7 +21,6 @@ function makeProgramDetail(programsApi, $stateParams) {
       });
 
       programsApi.getClientsForProgram($stateParams.programsApi).then(function (response) {
-        console.log(response);
         vm.clients = response.data;
       });
     }
