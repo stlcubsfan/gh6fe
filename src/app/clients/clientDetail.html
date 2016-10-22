@@ -90,7 +90,10 @@
                   <br><br><br><br>
                 </uib-tab>
                 <uib-tab index="2" heading="Health and Disability">
-                  <br><br><br><br>
+                  <br>
+                  <div ng-repeat="cdis in Client.clientDisabilities">
+                    {{cdis}}
+                  </div>
                 </uib-tab>
                 <uib-tab index="3" heading="Domestic Violence">
                   <br><br><br><br>
