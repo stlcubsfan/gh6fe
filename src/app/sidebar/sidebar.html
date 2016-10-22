@@ -8,8 +8,20 @@
         <img src="/img/org-logo.png" class="img-circle" alt="Org Image">
       </div>
       <div class="pull-left info">
-        <p>St. Patrick Center</p>
+
+        <div uib-dropdown is-open="status.isopen">
+          <a id="orgSelector" class="clickable" uib-dropdown-toggle>
+            {{ Sidebar.currentAgency.name }} <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="orgSelector">
+            <li role="menuitem" ng-repeat="agency in Sidebar.allAgencies">
+              <a class="clickable" ng-click="Sidebar.setCurrenctAgency(agency)">{{ agency.name }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
+
     </div>
     <!-- search form -->
     <form action="#" method="get" class="sidebar-form">
