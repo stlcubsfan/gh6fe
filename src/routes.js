@@ -18,4 +18,16 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/clients',
       component: 'clients'
     });
+
+  $stateProvider
+    .state('programs', {
+      url: '/programs',
+      component: 'programs'
+    });
+
+  $stateProvider
+    .state('programDetail', {
+      url: '/programs/:programId',
+      component: 'programDetail'
+    });
 }
