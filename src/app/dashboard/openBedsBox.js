@@ -35,11 +35,10 @@ function openBedsCtrl($stateParams, agencyApi, nearMeMiles, $http, gMapsApiKey) 
 
   function mapReduceBedsAvailable(agencies) {
     const result = agencies.map(agency => {
-      return agency.total_beds_available ? parseInt(agency.total_beds_available) : 0;
+      return agency.beds_available ? parseInt(agency.beds_available) : 0;
     }).reduce( (prev, curr) => {
       return prev + curr;
     }, 0);
-    console.log(result);
     return result;
   }
 }
