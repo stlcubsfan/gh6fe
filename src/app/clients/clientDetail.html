@@ -55,11 +55,18 @@
           <div class="row">
             <div class="col-md-6">
               <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-icon"
+                      ng-class="{
+                        'bg-red': (Client.client.housing_status === 'Homeless' || !Client.client.housing_status),
+                        'bg-yellow': Client.client.housing_status === 'Temporary',
+                        'bg-green': Client.client.housing_status === 'Permanent'
+                      }">
+                  <i class="fa fa-home"></i>
+                </span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">Bookmarks</span>
-                  <span class="info-box-number">410</span>
+                <span class="info-box-text">Housing Status</span>
+                  <span class="info-box-number">{{ Client.client.housing_status || 'Homeless' }}</span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -68,11 +75,17 @@
 
             <div class="col-md-6">
               <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+                <span class="info-box-icon" ng-class="{
+                        'bg-red': (Client.client.employment_status === 'None' || !Client.client.employment_status),
+                        'bg-yellow': (Client.client.employment_status === 'Part Time' || Client.client.employment_status === 'Seasonal'),
+                        'bg-green': Client.client.employment_status === 'Full Time'
+                }">
+                  <i class="fa fa-flag-o"></i>
+                </span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">Bookmarks</span>
-                  <span class="info-box-number">410</span>
+                  <span class="info-box-text">Employment Status</span>
+                  <span class="info-box-number">{{ Client.client.employment_status || 'None' }}</span>
                 </div>
                 <!-- /.info-box-content -->
               </div>
@@ -99,7 +112,7 @@
                         <td>{{cdis.creation_date | date: shortDate}}</td>
                       </tr>
                     </tbody>
-                  </table>                 
+                  </table>
                 </uib-tab>
                 <uib-tab index="1" heading="Income and Benefits">
                   <br>
@@ -116,7 +129,7 @@
                         <td>{{cdis.creation_date | date: shortDate}}</td>
                       </tr>
                     </tbody>
-                  </table>                  
+                  </table>
                 </uib-tab>
                 <uib-tab index="2" heading="Disability">
                   <br>
@@ -147,7 +160,7 @@
                         <td>{{cdis.creation_date | date: shortDate}}</td>
                       </tr>
                     </tbody>
-                  </table>                  
+                  </table>
                 </uib-tab>
                 <uib-tab index="4" heading="Domestic Violence">
                   <br>
@@ -164,7 +177,7 @@
                         <td>{{cdis.creation_date | date: shortDate}}</td>
                       </tr>
                     </tbody>
-                  </table>                  
+                  </table>
                 </uib-tab>
             </uib-tabset>
           </div>
