@@ -1,28 +1,51 @@
 <div class="content-wrapper">
   <section class="content-header">
-    <h1>Open Opportunties</h1>
+    <h1>Partners and Opportunities</h1>
   </section>
 
   <!-- Main content -->
   <section class="content">
     <div class="row">
-      <div class="col-md-6" ng-repeat="opp in Opportunities.opps">
-        <div class="box box-default">
-          <div class="box-header with-border">
-            <div class="pull-right"><b>{{ opp.salary }}</b></div>
-            <h3 class="box-title">{{ opp.name }}</h3>
-          </div>
 
-          <div class="box-body">
-            <p>{{ opp.description }}</p>
-            Total: <b>{{ opp.total_spots_available }}</b>
-            <br>
-            Open: <b>{{ opp.spots_open }}</b>
+      <div class="col-md-6" ng-repeat="partner in Opportunities.partners">
+        <!-- Widget: user widget style 1 -->
+        <div class="box box-widget widget-user">
+          <!-- Add the bg color to the header using any of the bg-* classes -->
+          <div class="widget-user-header bg-aqua-active">
+            <h3 class="widget-user-username">{{ partner.name }}</h3>
+            <h5 class="widget-user-desc">{{ partner.description }}</h5>
           </div>
+          <div class="partner-image">
+            <img ng-src="{{ partner.image_url }}" alt="User Avatar">
+          </div>
+          <div class="box-footer">
 
+
+            <div class="col-md-12" ng-repeat="opp in partner.opps">
+              <div class="box box-default">
+                <div class="box-header with-border">
+                  <div class="pull-right"><b>{{ opp.salary }}</b></div>
+                  <h3 class="box-title">{{ opp.name }}</h3>
+                </div>
+
+                <div class="box-body">
+                  <p>{{ opp.description }}</p>
+                  Total: <b>{{ opp.total_spots_available }}</b>
+                  <br>
+                  Open: <b>{{ opp.spots_open }}</b>
+                  <br><br>
+                  <button class="btn btn-block btn-primary">Check In Client</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+            <!-- /.row -->
+          </div>
         </div>
+        <!-- /.widget-user -->
       </div>
-    </div>
+
     <!-- /.row -->
   </section>
 </div>
