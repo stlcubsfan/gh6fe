@@ -6,8 +6,16 @@ angular
     controllerAs: 'Dashboard'
   });
 
-function makeHome(chartDemo) {
+function makeHome(chartDemo, agencyApi) {
     const vm = this;
 
-    vm.chartConfig = chartDemo;
+    init()
+
+    function init() {
+      vm.chartConfig = chartDemo;
+
+      agencyApi.getCurrent().then(agency => {
+        vm.currentAgency = agency;
+      });
+    }
 }

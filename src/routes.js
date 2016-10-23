@@ -42,4 +42,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/programs/:programId',
       component: 'programDetail'
     });
+
+  $stateProvider
+    .state('reserveBed', {
+      url: '/reserveBed',
+      component: 'reserveBed'
+    });
 }
