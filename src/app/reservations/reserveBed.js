@@ -12,6 +12,10 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
   vm.$onInit = () => {
     vm.newReservation = {};
     vm.sidebarTab = 1;
+    vm.searchAvailBeds = 1;
+    vm.refreshMap = false;
+    vm.filteredAgencies = [];
+    vm.searchRange = nearMeMiles;
     vm.mapConfig = {
       zoom: 12,
       dragging: true,
@@ -58,13 +62,14 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
   vm.reserveBeds = () => {
     const agencyId = vm.selectedAgency.id;
     const clientId = vm.newReservation.selected.id;
-    const numOfBeds = vm.newReservation.number;
+    const numOfBeds = vm.searchAvailBeds;
 
     let reservation = {
       label: "Bed Reservation",
       recorded_by_id: 2,
       client_id: clientId,
       number_in_party: numOfBeds,
+      type: 'RESERVATION',
       notes: null,
       status: "HOLD"
     }
@@ -96,6 +101,18 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
     vm.newReservation = {};
   }
 
+  vm.requeryAgencies = () => {
+    const params = {
+      xpos: vm.currentAgency.pos.x,
+      ypos: vm.currentAgency.pos.y,
+      range: vm.searchRange
+    };
+
+    agencyApi.getAgenciesNearMe(params).then(agencies => {
+      vm.agenciesNearby = agencies.data;
+    });
+  }
+
   $scope.$on('agency-window-button-clicked', (e, agencyId) => {
     let clickedAgency = vm.agenciesNearby.find(agency => {
       return agency.id === agencyId;
@@ -103,6 +120,23 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
 
     vm.selectAgency(clickedAgency);
   });
+
+  $scope.$watch(function watchValue( scope ) {
+        // Return the "result" of the watch expression.
+        return( vm.filteredAgencies.length );
+    }, (curr, old) => {
+    if (curr !== old) {
+      vm.mapConfig.markers = [];
+      let i = 1;
+      vm.filteredAgencies.forEach(agency => {
+        vm.mapConfig.markers.push(createMarker(agency, i));
+        i++;
+      });
+      vm.refreshMap = true;
+    } else {
+      vm.refreshMap = false;
+    }
+  })
 
   $window.mapWindowButtonClicked = (event) => {
     const id = parseInt(event.target.id.replace('agency-', ''));
