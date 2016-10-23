@@ -5,10 +5,10 @@
       <input class="no-input" placeholder="search" ng-model="reserveBed.searchTerm">
     </label>
     <label>Beds Needed:
-      <input class="no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchAvailBeds"/>
+      <input class="number-input no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchAvailBeds"/>
     </label>
     <label>Miles from Location:
-      <input class="no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchRange" ng-change="reserveBed.requeryAgencies()"/>
+      <input class="number-input no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchRange" ng-change="reserveBed.requeryAgencies()"/>
     </label>
   </section>
   <section class="content">
