@@ -10,7 +10,8 @@ function reservationApi($http, restBaseApi, agencyApi) {
 
   return {
     all: getReservationsForAgency,
-    one: getReservation
+    one: getReservation,
+    create: createReservation
   }
 
   function getReservationsForAgency(id) {
@@ -21,5 +22,9 @@ function reservationApi($http, restBaseApi, agencyApi) {
   function getReservation(reservationId, agnecyId) {
     agencyId = agencyId || currentAgency.id;
     return $http.get(`${baseApi}/${agencyId}/reservations/${reservationId}`);
+  }
+
+  function createReservation() {
+    
   }
 }

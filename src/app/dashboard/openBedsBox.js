@@ -31,6 +31,10 @@ function openBedsCtrl($stateParams, agencyApi, nearMeMiles) {
   }
 
   vm.calcProgress = () => {
+    if (!vm.currentAgency) {
+      return '0%';
+    }
+
     const total = parseInt(vm.currentAgency.total_beds_available);
     const reserved = parseInt(vm.currentAgency.reservation_count);
     return (reserved / total * 100) + '%'
