@@ -20,20 +20,12 @@
               <div class="reservation-info">
                 Beds reserved: {{ reservation.number_in_party }}
               </div>
-              <div class="reservation-actions">
-                <button ng-if="reservation.status === 'HOLD'" type="button" class="btn btn-block btn-primary" ng-click="reservationMgmt.checkInExistingReservation(reservation)">Check-In Client</button>
+              <div class="reservation-actions" ng-if="reservation.status === 'HOLD'">
+                <button type="button" class="btn btn-block btn-danger" ng-click="reservationMgmt.cancelReservation(reservation.id)">Cancel Reservation</button>
+                <button type="button" class="btn btn-block btn-primary" ng-click="reservationMgmt.checkInExistingReservation(reservation)">Check-In Client</button>
               </div>
             </div>
           </div>
-        </div>
-
-        <div ng-class="{'control-sidebar-open': reservationMgmt.selectedReservation !== undefined}" class="flex-body-sidebar">
-          <aside id="sidebar" class="check-in-sidebar control-sidebar control-sidebar-dark">
-            <div class="close-sidebar">
-              <i class="fa fa-times" style="color: white; cursor: pointer" ng-click="reserveBed.resetSelectedReservation()"></i>
-            </div>
-            <check-in></check-in>
-          </aside>
         </div>
       </div>
     </section>

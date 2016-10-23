@@ -45,6 +45,10 @@ function reservationApi($http, restBaseApi, agencyApi) {
     return $http.put(`${baseApi}/${agencyId}/reservations/${reservation.id}`, cleanReservation);
   }
 
+  function cancel(agencyId, reservationId) {
+    return $http.delete(`${baseApi}/${agencyId}/reservations/${reservationId}`);
+  }
+
   function create(agencyId, clientId, number) {
     let reservation = {
       label: "Bed Reservation",
@@ -63,6 +67,7 @@ function reservationApi($http, restBaseApi, agencyApi) {
     all: getReservationsForAgency,
     one: getReservation,
     update: update,
+    cancel: cancel,
     checkin: checkin,
     create: create
   }

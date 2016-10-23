@@ -37,6 +37,16 @@ function manageReservationsCtrl($scope, $stateParams, reservationApi, agencyApi,
     });
   }
 
+  vm.cancelReservation = reservationId => {
+    reservationApi.cancel(vm.currentAgency.id, reservationId).then(result => {
+      const spliceAt = _.findIndex(vm.reservations, reservation => {
+        return reservation.id === reservationId;
+      });
+      
+      vm.reservations.splice(spliceAt, 1);
+    });
+  }
+
   vm.checkInExistingReservation = reservation => {
     reservation.status = "CHECKEDIN";
     reservationApi.update(vm.currentAgency.id, reservation).then(result => {

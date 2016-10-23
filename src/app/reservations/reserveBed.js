@@ -65,6 +65,7 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
       recorded_by_id: 2,
       client_id: clientId,
       number_in_party: numOfBeds,
+      type: 'RESERVATION',
       notes: null,
       status: "HOLD"
     }
