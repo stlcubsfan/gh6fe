@@ -11,7 +11,8 @@ function agencyApi($http, restBaseApi) {
         one: getAgency,
         setCurrent: setCurrent,
         getCurrent: getCurrent,
-        getAgenciesNearMe: getAgenciesNearMe
+        getAgenciesNearMe: getAgenciesNearMe,
+        getKeyIndicators: getKeyIndicators
     }
 
     function getAgencies(shouldBustCache) {
@@ -52,4 +53,11 @@ function agencyApi($http, restBaseApi) {
         params: params
       });
     }
+
+    function getKeyIndicators() {
+        return this.getCurrent().then(agency => {
+            return $http.get('http://gh6api.herokuapp.com/agencies/' + agency.id + '/key-indicators');
+        });
+    }
+
 }
