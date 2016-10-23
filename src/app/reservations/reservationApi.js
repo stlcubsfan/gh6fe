@@ -11,7 +11,8 @@ function reservationApi($http, restBaseApi, agencyApi) {
   return {
     all: getReservationsForAgency,
     one: getReservation,
-    checkin: checkin
+    checkin: checkin,
+    create: createReservation
   }
 
   function getReservationsForAgency(id) {
@@ -34,5 +35,9 @@ function reservationApi($http, restBaseApi, agencyApi) {
     }
 
     return $http.post(baseApi + '/' + agnecyId + '/reservations', reservation);
+  }
+
+  function createReservation() {
+
   }
 }

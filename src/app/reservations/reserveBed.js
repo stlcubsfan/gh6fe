@@ -11,6 +11,7 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
 
   vm.$onInit = () => {
     vm.newReservation = {};
+    vm.sidebarTab = 1;
 
     agencyApi.getCurrent().then(agency => {
       vm.currentAgency = agency;
