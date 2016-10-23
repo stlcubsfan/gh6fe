@@ -1,3 +1,2 @@
 angular
-  .module('app', ['ui.router', 'highcharts-ng', 'ui.bootstrap', 'ui.select', 'ngSanitize']);
-
+  .module('app', ['ui.router', 'highcharts-ng', 'ui.bootstrap', 'ui.select', 'ngSanitize', 'uiGmapgoogle-maps']);

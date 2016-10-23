@@ -12,10 +12,19 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
   vm.$onInit = () => {
     vm.newReservation = {};
     vm.sidebarTab = 1;
+    vm.mapConfig = {
+      zoom: 12,
+      dragging: true
+    };
 
     agencyApi.getCurrent().then(agency => {
       vm.currentAgency = agency;
-      vm.totalBeds = vm.currentAgency.beds_available;
+      vm.totalBeds = parseInt(vm.currentAgency.beds_available);
+
+      vm.mapConfig.center = {
+        latitude: vm.currentAgency.pos.y,
+        longitude: vm.currentAgency.pos.x
+      }
 
       const params = {
         xpos: vm.currentAgency.pos.x,
@@ -58,7 +67,7 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
       const agencyReservedAgainst = vm.agenciesNearby.find(agency => {
         return agency.id === agencyId;
       });
-      console.log(agencyReservedAgainst);
+
       agencyReservedAgainst.beds_available = agencyReservedAgainst.beds_available - numOfBeds;
       vm.selectedAgency = undefined;
     });

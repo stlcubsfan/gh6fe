@@ -7,6 +7,11 @@
     </ol>
   </section>
   <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <ui-gmap-google-map ng-if="reserveBed.mapConfig.center" center='reserveBed.mapConfig.center' zoom='reserveBed.mapConfig.zoom'></ui-gmap-google-map>
+      </div>
+    </div>
     <div class="row flex-body">
       <div class="col-md-12 flex-body-main">
         <div class="box" ng-repeat="agency in reserveBed.agenciesNearby | orderBy:'distance'">
