@@ -15,7 +15,11 @@ angular
         let allOpps = [];
 
         partnersApi.all().then(partners => {
-          _.each(partners.data, function (partner) {
+          vm.partners = partners.data;
+
+          _.each(vm.partners, function (partner) {
+            partner.opps = [];
+
             partnersApi.opportunities(partner.id).then(opps => {
               vm.opportunityCount += opps.data.length;
 
@@ -23,11 +27,11 @@ angular
               _.each(opps.data, function (opp) {
                 vm.spotCount += Number(opp.spots_open);
                 allOpps.push(opp);
+                partner.opps.push(opp);
               });
 
               vm.opps = allOpps;
 
-              console.log(vm.opps);
             });
           });
         });
