@@ -3,8 +3,8 @@ angular
   .factory('clientEducationEmploymentsApi', clientEducationEmploymentsApi);
 
 function clientEducationEmploymentsApi($http) {
-    //var baseApi = "http://gh6api.herokuapp.com/clients/";
-    var baseApi = "http://localhost:3002/clients/"
+    var baseApi = "http://gh6api.herokuapp.com/clients/";
+    //var baseApi = "http://localhost:3002/clients/"
     return {
         all: all,
         one: one,

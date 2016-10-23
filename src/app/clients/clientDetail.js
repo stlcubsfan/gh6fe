@@ -32,13 +32,12 @@ function clientDetail($stateParams, clientsApi,
 
     function updateEmployment(emp) {
         clientEducationEmploymentsApi.update(emp).then(function(res) {
-            recalculateViability();
-            console.log(res);
+            //recalculateViability();
+            cd.clientHealthViability = 100;
             emp = res.data;
-            console.log(emp);
             hydrateEmp(emp);
-            console.log(emp);
             cd.idEditing = null;
+            init();
         });
     }
 
