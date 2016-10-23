@@ -4,7 +4,6 @@
       <h1>
         Programs
       </h1>
-
     </section>
 
     <!-- Main content -->
@@ -14,7 +13,13 @@
         <div class="col-md-6" ng-repeat="program in Programs.programs">
           <div class="box box-default">
             <div class="box-header with-border">
-              <h3 class="box-title truncate"><a ui-sref="programDetail({ programId: program.id })">{{ program.title }}</a></h3>
+              <h3 class="box-title truncate">
+                <i class="fa fa-cutlery" aria-hidden="true" ng-if="program.category == 'meals'"></i>
+                <i class="fa fa-medkit" aria-hidden="true" ng-if="program.category == 'health'"></i>
+                <i class="fa fa-dollar" aria-hidden="true" ng-if="program.category == 'careers'"></i>
+                <i class="fa fa-home" aria-hidden="true" ng-if="program.category == 'housing'"></i>
+                <i class="fa fa-graduation-cap" aria-hidden="true" ng-if="program.category == 'education'"></i>
+                <a ui-sref="programDetail({ programId: program.id })">{{ program.title }}</a></h3>
             </div>
             <div class="box-body no-padding">
               <ul class="nav nav-stacked">
