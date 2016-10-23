@@ -45,7 +45,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $stateProvider
     .state('reserveBed', {
-      url: '/reserveBed',
+      url: '/agencies',
       component: 'reserveBed'
     });
 
