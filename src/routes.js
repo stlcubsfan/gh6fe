@@ -56,13 +56,14 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     });
 
   $stateProvider
-    .state('agencyHealth', {
-      url: '/agency-health',
-      component: 'agencyHealth'
-    })
-  $stateProvider
     .state('manageReservations', {
       url: '/manageReservations',
       component: 'manageReservations'
+    });
+
+  $stateProvider
+    .state('agencyHealth', {
+      url: '/agency-health',
+      component: 'agencyHealth'
     });
 }

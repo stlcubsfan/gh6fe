@@ -17,9 +17,11 @@
               <span class="pull-right">Time reserved: {{ reservation.happened_on | date:'shortTime' }}</span>
             </div>
             <div class="box-body reservation-container">
-              <div class="reservation-info">
+              <h4 class="reservation-info">
                 Beds reserved: {{ reservation.number_in_party }}
-              </div>
+                <span class="label pull-right bg-green" ng-if="reservation.status === 'CHECKEDIN'">
+                  Status: Checked In
+              </h4>
               <div class="reservation-actions" ng-if="reservation.status === 'HOLD'">
                 <button type="button" class="btn btn-block btn-danger" ng-click="reservationMgmt.cancelReservation(reservation.id)">Cancel Reservation</button>
                 <button type="button" class="btn btn-block btn-primary" ng-click="reservationMgmt.checkInExistingReservation(reservation)">Check-In Client</button>
