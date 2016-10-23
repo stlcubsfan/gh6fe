@@ -6,16 +6,27 @@ angular
     controllerAs: 'reserveBed'
   });
 
-function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, clientsApi, restBaseApi, $http) {
+function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservationApi, nearMeMiles, clientsApi, restBaseApi, $http, $window) {
   const vm = this;
 
   vm.$onInit = () => {
     vm.newReservation = {};
     vm.sidebarTab = 1;
+    vm.mapConfig = {
+      zoom: 12,
+      dragging: true,
+      enableEventPropagation: true,
+      refresh: true
+    };
 
     agencyApi.getCurrent().then(agency => {
       vm.currentAgency = agency;
-      vm.totalBeds = vm.currentAgency.beds_available;
+      vm.totalBeds = parseInt(vm.currentAgency.beds_available);
+
+      vm.mapConfig.center = {
+        latitude: vm.currentAgency.pos.y,
+        longitude: vm.currentAgency.pos.x
+      }
 
       const params = {
         xpos: vm.currentAgency.pos.x,
@@ -25,8 +36,13 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
 
       agencyApi.getAgenciesNearMe(params).then(agencies => {
         vm.agenciesNearby = agencies.data;
+        vm.mapConfig.markers = [];
+        let i = 0;
+
         vm.agenciesNearby.forEach(agency => {
           agency.distance = parseFloat(agency.distance);
+          vm.mapConfig.markers.push(createMarker(agency, i));
+          i++;
         });
       });
     });
@@ -54,13 +70,11 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
     }
 
     $http.post(`${restBaseApi}/agencies/${agencyId}/reservations`, reservation).then(result => {
-      vm.newReservation = {};
       const agencyReservedAgainst = vm.agenciesNearby.find(agency => {
         return agency.id === agencyId;
       });
-      console.log(agencyReservedAgainst);
       agencyReservedAgainst.beds_available = agencyReservedAgainst.beds_available - numOfBeds;
-      vm.selectedAgency = undefined;
+      vm.resetSelectingAgency();
     });
   }
 
@@ -68,11 +82,39 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
     vm.selectedAgency = agency;
     reservationApi.all(vm.selectedAgency.id).then(results => {
       vm.selectedAgency.reservations = results.data;
+
       vm.selectedAgency.reservations.forEach(reservation => {
-        reservation.client = vm.clients.filter(client => {
+        reservation.client = vm.clients.find(client => {
           return client.id === reservation.client_id;
         });
       });
     });
   }
+
+  vm.resetSelectingAgency = () => {
+    vm.selectedAgency = undefined;
+    vm.newReservation = {};
+  }
+
+  $scope.$on('agency-window-button-clicked', (e, agencyId) => {
+    let clickedAgency = vm.agenciesNearby.find(agency => {
+      return agency.id === agencyId;
+    });
+
+    vm.selectAgency(clickedAgency);
+  });
+
+  $window.mapWindowButtonClicked = (event) => {
+    const id = parseInt(event.target.id.replace('agency-', ''));
+    $rootScope.$broadcast('agency-window-button-clicked', id);
+  }
+
+  function createMarker(agency, int) {
+    return {
+      id: int,
+      latitude: agency.pos.y,
+      longitude: agency.pos.x,
+      agency: agency
+    };
+  };
 }
