@@ -53,6 +53,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('opportunities', {
       url: '/opportunities',
       component: 'opportunities'
-    });    
-    
+    });
+
+  $stateProvider
+    .state('agencyHealth', {
+      url: '/agency-health',
+      component: 'agencyHealth'
+    });
+
 }
