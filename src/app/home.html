@@ -4,11 +4,7 @@
       <h1>
         Dashboard
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
+
     </section>
 
     <!-- Main content -->
@@ -17,13 +13,13 @@
 
       <div class="row" ng-if="!Dashboard.isLoading">
         <div class="col-md-8">
-          <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
+          <check-in></check-in>
 
-          <highchart style="width: 100%;" id="chart1" config="Dashboard.chartConfig"></highchart>
+          <!-- <highchart style="width: 100%;" id="chart1" config="Dashboard.chartConfig"></highchart> -->
         </div>
 
         <div class="col-md-4">
-          <check-in></check-in>
+          <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
           <!-- <ng-include src="'app/clients/checkIn.html'" ng-controller="checkIn as checkIn"></ng-include> -->
         </div>
       </div>
