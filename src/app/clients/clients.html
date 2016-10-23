@@ -79,12 +79,12 @@
             </div>
             <div class="box-body">
               Joined: {{ client.creation_date | date }}
+              <br>
+              <small><i class="fa fa-circle text-{{ Clients.getClassForHousing(client) }}"></i></small> Housing: <b>{{ client.housing_status || 'None' }}</b>
+              <br>
+              <small><i class="fa fa-circle text-{{ Clients.getClassForEmployment(client) }}"></i></small> Employment: <b>{{ client.employment_status || 'None' }}</b>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer">
-              Status: <i class="fa fa-thumbs-up"></i>
-            </div>
-            <!-- /.box-footer-->
           </div>
         </div>
       </div>
