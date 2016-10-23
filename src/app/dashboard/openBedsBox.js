@@ -3,34 +3,41 @@ angular
   .component('openBedsBox', {
     templateUrl: 'app/dashboard/openBedsBox.html',
     controller: openBedsCtrl,
-    controllerAs: 'openBeds'
+    controllerAs: 'openBeds',
+    require: {
+      dashboardCtrl: '^home'
+    }
   });
 
-function openBedsCtrl($stateParams, agencyApi, nearMeMiles, $http, gMapsApiKey) {
+function openBedsCtrl($stateParams, agencyApi, nearMeMiles) {
   const vm = this;
 
-  init();
-
-  function init() {
+  vm.$onInit = () => {
     vm.totalBedsNearMe = null;
+    agencyApi.getCurrent().then(agency => {
+      vm.currentAgency = agency;
+      vm.totalBeds = vm.currentAgency.beds_available;
 
-    agencyApi.all().then(agencies => {
-      vm.agencies = agencies.data;
-      vm.totalBeds = mapReduceBedsAvailable(vm.agencies);
-      agencyApi.getCurrent().then(agency => {
-        vm.currentAgency = agency;
+      const params = {
+        xpos: vm.currentAgency.pos.x,
+        ypos: vm.currentAgency.pos.y,
+        range: nearMeMiles
+      };
 
-        const params = {
-          xpos: vm.currentAgency.pos.x,
-          ypos: vm.currentAgency.pos.y,
-          range: nearMeMiles
-        };
-
-        agencyApi.getAgenciesNearMe(params).then(agencies => {
-          vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
-        });
+      agencyApi.getAgenciesNearMe(params).then(agencies => {
+        vm.totalBedsNearMe = mapReduceBedsAvailable(agencies.data);
       });
     });
+  }
+
+  vm.calcProgress = () => {
+    if (!vm.currentAgency) {
+      return '0%';
+    }
+
+    const total = parseInt(vm.currentAgency.total_beds_available);
+    const reserved = parseInt(vm.currentAgency.reservation_count);
+    return (reserved / total * 100) + '%'
   }
 
   function mapReduceBedsAvailable(agencies) {

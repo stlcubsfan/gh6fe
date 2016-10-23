@@ -26,6 +26,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     });
 
   $stateProvider
+    .state('checkIn', {
+      url: '/check-in',
+      component: 'checkIn'
+    });
+
+  $stateProvider
     .state('programs', {
       url: '/programs',
       component: 'programs'
@@ -35,5 +41,11 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('programDetail', {
       url: '/programs/:programId',
       component: 'programDetail'
+    });
+
+  $stateProvider
+    .state('reserveBed', {
+      url: '/reserveBed',
+      component: 'reserveBed'
     });
 }

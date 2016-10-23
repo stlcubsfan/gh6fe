@@ -3,3 +3,68 @@
         color: #fff;
     }
 }
+
+.progress-bar {
+  transition: width 1s ease-in-out;
+}
+
+#open-box {
+  cursor: pointer;
+
+  &:hover {
+    opacity: .85;
+  }
+}
+
+.flex-body {
+  display: flex;
+  position: relative;
+}
+
+.flex-body-main {
+  flex: 1 0 70%;
+
+  .box-title {
+    display: block;
+  }
+}
+
+.flex-body-sidebar {
+  flex-basis: 30%;
+  height: 100%;
+  width: 100%;
+}
+
+#sidebar {
+  position: relative;
+  display: block;
+  right: 0;
+  padding-top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 200vh;
+
+  .select2-container {
+    display: block;
+  }
+}
+
+.agency-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.agency-info {
+  flex-grow: 1;
+}
+
+.ui-select-match-close.select2-search-choice-close:before {
+  content: '\f00d';
+  font-family: FontAwesome;
+  display: inline-block;
+  position: relative;
+  font-size: 1.4rem;
+  line-height: 1.1rem;
+  color: black;
+}
