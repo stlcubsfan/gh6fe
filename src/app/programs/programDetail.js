@@ -6,7 +6,7 @@ angular
     controllerAs: 'ProgramDetail'
   });
 
-function makeProgramDetail(programsApi, $stateParams) {
+function makeProgramDetail(programsApi, $stateParams, clientsApi) {
     const vm = this;
 
     init();
@@ -20,8 +20,13 @@ function makeProgramDetail(programsApi, $stateParams) {
         vm.allCategories = response.data;
       });
 
-      programsApi.getClientsForProgram($stateParams.programsApi).then(function (response) {
-        vm.clients = response.data;
+      programsApi.getClientsForProgram($stateParams.programId).then(function (response) {
+        vm.enrollments = response.data;
+        _.each(vm.enrollments, function (enrollment) {
+          clientsApi.one(enrollment.client_id).then(r => {
+            enrollment.clientData = r.data;
+          });
+        });
       });
     }
 }
