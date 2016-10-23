@@ -2,7 +2,12 @@
   <section class="content-header">
     <h1>Agencies Nearby</h1>
     <input class="no-input" placeholder="search" ng-model="reserveBed.searchTerm">
-    <input class="no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchAvailBeds"/>
+    <label>Beds Needed:
+      <input class="no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchAvailBeds"/>
+    </label>
+    <label>Miles from Location:
+      <input class="no-input" min="1" type="number" placeholder="1" ng-model="reserveBed.searchRange" ng-change="reserveBed.requeryAgencies()"/>
+    </label>
   </section>
   <section class="content">
     <div class="row flex-body">

@@ -15,6 +15,7 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
     vm.searchAvailBeds = 1;
     vm.refreshMap = false;
     vm.filteredAgencies = [];
+    vm.searchRange = nearMeMiles;
     vm.mapConfig = {
       zoom: 12,
       dragging: true,
@@ -98,6 +99,18 @@ function reserveBedCtrl($scope, $rootScope, $stateParams, agencyApi, reservation
   vm.resetSelectingAgency = () => {
     vm.selectedAgency = undefined;
     vm.newReservation = {};
+  }
+
+  vm.requeryAgencies = () => {
+    const params = {
+      xpos: vm.currentAgency.pos.x,
+      ypos: vm.currentAgency.pos.y,
+      range: vm.searchRange
+    };
+
+    agencyApi.getAgenciesNearMe(params).then(agencies => {
+      vm.agenciesNearby = agencies.data;
+    });
   }
 
   $scope.$on('agency-window-button-clicked', (e, agencyId) => {
