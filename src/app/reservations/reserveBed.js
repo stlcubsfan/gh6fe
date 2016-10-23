@@ -6,7 +6,7 @@ angular
     controllerAs: 'reserveBed'
   });
 
-function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, clientsApi) {
+function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, clientsApi, restBaseApi, $http) {
   const vm = this;
 
   vm.$onInit = () => {
@@ -39,8 +39,32 @@ function reserveBedCtrl($stateParams, agencyApi, reservationApi, nearMeMiles, cl
     });
   }
 
+  vm.reserveBeds = () => {
+    const agencyId = vm.selectedAgency.id;
+    const clientId = vm.newReservation.selected.id;
+    const numOfBeds = vm.newReservation.number;
+
+    let reservation = {
+      label: "Bed Reservation",
+      recorded_by_id: 2,
+      client_id: clientId,
+      number_in_party: numOfBeds,
+      notes: null,
+      status: "HOLD"
+    }
+
+    $http.post(`${restBaseApi}/agencies/${agencyId}/reservations`, reservation).then(result => {
+      vm.newReservation = {};
+      const agencyReservedAgainst = vm.agenciesNearby.find(agency => {
+        return agency.id === agencyId;
+      });
+      console.log(agencyReservedAgainst);
+      agencyReservedAgainst.beds_available = agencyReservedAgainst.beds_available - numOfBeds;
+      vm.selectedAgency = undefined;
+    });
+  }
+
   vm.selectAgency = agency => {
-    console.log(agency);
     vm.selectedAgency = agency;
     reservationApi.all(vm.selectedAgency.id).then(results => {
       vm.selectedAgency.reservations = results.data;

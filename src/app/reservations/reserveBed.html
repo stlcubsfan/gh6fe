@@ -43,10 +43,10 @@
                 Reserve Beds
               </h4>
               <div class="form-group">
-                <span class="control-sidebar-subheading">Client(s) to reserve for</span>
-                <ui-select multiple ng-model="reserveBed.newReservation.selected" theme="select2" title="Choose a client">
+                <span class="control-sidebar-subheading">Client reserving for</span>
+                <ui-select ng-model="reserveBed.newReservation.selected" theme="select2" title="Choose a client">
                   <ui-select-match placeholder="Select a client in the list or search his/her name">
-                    {{$select.selected[0].full_name}}
+                    {{$select.selected.full_name}}
                   </ui-select-match>
                   <ui-select-choices repeat="client in reserveBed.clients | filter:$select.search">
                     <div ng-bind-html="client.full_name | highlight: $select.search"></div>
@@ -58,11 +58,11 @@
               </div>
               <div class="form-group">
                 <label class="control-sidebar-subheading">
-                  Number of beds to reserve
+                  Number of beds (family members included)
                   <input type="number" class="form-control" min="1" placeholder="1" value="1" ng-model="reserveBed.newReservation.number" required name="" />
               </div>
               <div class="form-group">
-                <button type="button" class="btn btn-block btn-success" ng-click="reserveBed.reserveBed()">Reserve Beds</button>
+                <button type="button" class="btn btn-block btn-success" ng-click="reserveBed.reserveBeds()">Reserve Beds</button>
               </div>
             </div>
             <div class="tab-pane" ng-class="{'active': reserveBed.sidebarTab === 2}">
