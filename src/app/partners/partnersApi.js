@@ -2,7 +2,7 @@ angular.module('app')
     .factory('partnersApi', partnersApi);
 
 function partnersApi($http) {
-    let baseApi = 'http://gr6api.herokuapp.com/partners'
+    let baseApi = 'http://gh6api.herokuapp.com/partners'
     
     return {
         all: all,
