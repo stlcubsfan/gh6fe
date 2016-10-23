@@ -42,6 +42,10 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
       }
     ];
 
+    vm.checkInExistingClient = function (clientId) {
+
+    };
+
     vm.createClient = function () {
       if (vm.ethnicitySelections) {
         vm.ethnicitySelections.forEach(selctionTitle => {
@@ -53,7 +57,7 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
       return agencyApi.getCurrent().then(agencyResponse => {
         return clientsApi.create(vm.newCheckIn).then((clientResponse) => {
           return reservationApi.checkin(agencyResponse.id, clientResponse.data.id).then(reservationResponse => {
-            console.log(reservationResponse)
+            console.log(reservationResponse);
           })
         })
       })
