@@ -6,7 +6,7 @@ angular
     controllerAs: 'CheckIn'
   });
 
-function makecheckIn(clientsApi) {
+function makecheckIn(clientsApi, reservationApi, agencyApi) {
     let vm = this;
 
     vm.newCheckIn = {};
@@ -50,8 +50,12 @@ function makecheckIn(clientsApi) {
         });
       }
 
-      clientsApi.create(vm.newCheckIn).then(response => {
-        console.log(response);
+      return agencyApi.getCurrent().then(agencyResponse => {
+        return clientsApi.create(vm.newCheckIn).then((clientResponse) => {
+          return reservationApi.checkin(agencyResponse.id, clientResponse.data.id).then(reservationResponse => {
+            console.log(reservationResponse)
+          })
+        })
       })
     };
 
