@@ -30,6 +30,12 @@ function openBedsCtrl($stateParams, agencyApi, nearMeMiles) {
     });
   }
 
+  vm.calcProgress = () => {
+    const total = parseInt(vm.currentAgency.total_beds_available);
+    const reserved = parseInt(vm.currentAgency.reservation_count);
+    return (reserved / total * 100) + '%'
+  }
+
   function mapReduceBedsAvailable(agencies) {
     const result = agencies.map(agency => {
       return agency.beds_available ? parseInt(agency.beds_available) : 0;

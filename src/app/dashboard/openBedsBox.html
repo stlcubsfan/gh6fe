@@ -8,7 +8,7 @@
       </span>
 
       <div class="progress">
-        <div class="progress-bar" style="width: 80%"></div>
+        <div class="progress-bar" ng-style="{ width: openBeds.calcProgress() }"></div>
       </div>
           <span class="progress-description">
             <a ng-if="openBeds.totalBedsNearMe !== null" href="#">{{openBeds.totalBedsNearMe}} Nearby</a>
