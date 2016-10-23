@@ -2,6 +2,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
+        <i class="fa fa-cutlery" aria-hidden="true" ng-if="ProgramDetail.program.category == 'meals'"></i>
+        <i class="fa fa-medkit" aria-hidden="true" ng-if="ProgramDetail.program.category == 'health'"></i>
+        <i class="fa fa-dollar" aria-hidden="true" ng-if="ProgramDetail.program.category == 'careers'"></i>
+        <i class="fa fa-home" aria-hidden="true" ng-if="ProgramDetail.program.category == 'housing'"></i>
+        <i class="fa fa-graduation-cap" aria-hidden="true" ng-if="ProgramDetail.program.category == 'education'"></i>
         {{ ProgramDetail.program.title }}
       </h1>
     </section>
