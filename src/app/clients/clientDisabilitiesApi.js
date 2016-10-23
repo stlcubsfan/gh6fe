@@ -20,10 +20,10 @@ function clientDisabilitiesApi($http) {
     }
 
     function saveDisability(disability) {
-        return $http.post(baseApi + clientId + '/disabilities');
+        return $http.post(baseApi + clientId + '/disabilities', disability);
     }
 
     function updateDisability(disability) {
-        return $http.put(baseApi + clientId + '/disabilities/' + disability.clientid);
+        return $http.put(baseApi + clientId + '/disabilities/' + disability.id, disability);
     }
 }

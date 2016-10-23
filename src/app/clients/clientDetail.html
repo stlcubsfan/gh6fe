@@ -84,12 +84,41 @@
           <div class="box box-widget">
             <uib-tabset class="active">
                 <uib-tab index="0" heading="Employment/Education">
-                  <br><br><br><br>
+                  <br>
+                   <table class="table table-striped">
+                    <thead>
+                      <th>Education Level</th><th>School Status</th><th>Employment Type</th>
+                      <th>Reason Not Employed</th><th>Date Noted</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="cdis in Client.clientEducationEmployment">
+                        <td>{{cdis.educationLevel}}</td>
+                        <td>{{cdis.schoolStatus}}</td>
+                        <td>{{cdis.employmentType}}</td>
+                        <td>{{cdis.notEmployedReason}}</td>
+                        <td>{{cdis.creation_date | date: shortDate}}</td>
+                      </tr>
+                    </tbody>
+                  </table>                 
                 </uib-tab>
                 <uib-tab index="1" heading="Income and Benefits">
-                  <br><br><br><br>
+                  <br>
+                    <table class="table table-striped">
+                    <thead>
+                      <th>Monthly Income</th><th>Earned Income</th><th>Social Security</th>
+                      <th>Date Noted</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="cdis in Client.clientIncomes">
+                        <td>{{cdis.totalmonthlyincome }}</td>
+                        <td>{{cdis.earnedincome }}</td>
+                        <td>{{cdis.ssi}}</td>
+                        <td>{{cdis.creation_date | date: shortDate}}</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
                 </uib-tab>
-                <uib-tab index="2" heading="Health and Disability">
+                <uib-tab index="2" heading="Disability">
                   <br>
                   <table class="table table-striped">
                     <thead>
@@ -102,8 +131,40 @@
                     </tbody>
                   </table>
                 </uib-tab>
-                <uib-tab index="3" heading="Domestic Violence">
-                  <br><br><br><br>
+                <uib-tab index="3" heading="Health">
+                  <br>
+                   <table class="table table-striped">
+                    <thead>
+                      <th>General Health</th><th>Mental Health</th><th>Pregnancy</th>
+                      <th>Due Date</th><th>Date Noted</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="cdis in Client.clientHealth">
+                        <td>{{cdis.generalHealth}}</td>
+                        <td>{{cdis.mentalHealth}}</td>
+                        <td>{{cdis.pregnant}}</td>
+                        <td>{{cdis.duedate}}</td>
+                        <td>{{cdis.creation_date | date: shortDate}}</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+                </uib-tab>
+                <uib-tab index="4" heading="Domestic Violence">
+                  <br>
+                   <table class="table table-striped">
+                    <thead>
+                      <th>Domestic Victim</th><th>Occurred</th><th>Currently Fleeing</th>
+                      <th>Date Noted</th>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="cdis in Client.clientEducationEmployment">
+                        <td>{{cdis.pregnant}}</td>
+                        <td>{{cdis.dvWhenOccured | date: shortDate}}</td>
+                        <td>{{cdis.currentlyfleeing}}</td>
+                        <td>{{cdis.creation_date | date: shortDate}}</td>
+                      </tr>
+                    </tbody>
+                  </table>                  
                 </uib-tab>
             </uib-tabset>
           </div>
