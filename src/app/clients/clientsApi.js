@@ -8,7 +8,9 @@ function clientsApi($http) {
     return {
         all: getClients,
         one: getClient,
-        create: createClient
+        create: createClient,
+        getStatusColorForHousing: getStatusColorForHousing,
+        getStatusColorForEmployment: getStatusColorForEmployment
     }
 
     function getClients() {
@@ -29,5 +31,29 @@ function clientsApi($http) {
 
         delete cleanClient.bedsNeeded;
         return cleanClient;
+    }
+
+    function getStatusColorForHousing(client) {
+      let status = client.housing_status;
+
+      if (!status || status === 'Homeless') {
+        return 'red';
+      } else if (status === 'Temporary') {
+        return 'yellow';
+      } else {
+        return 'green';
+      }
+    }
+
+    function getStatusColorForEmployment(client) {
+      let status = client.employment_status;
+
+      if (!status || status === 'None') {
+        return 'red';
+      } else if (status === 'Part Time' || status === 'Seasonal') {
+        return 'yellow';
+      } else {
+        return 'green';
+      }
     }
 }

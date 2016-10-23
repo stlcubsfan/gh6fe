@@ -56,12 +56,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="info-box">
-                <span class="info-box-icon"
-                      ng-class="{
-                        'bg-red': (Client.client.housing_status === 'Homeless' || !Client.client.housing_status),
-                        'bg-yellow': Client.client.housing_status === 'Temporary',
-                        'bg-green': Client.client.housing_status === 'Permanent'
-                      }">
+                <span class="info-box-icon bg-{{ Client.getStatusColorForHousing(Client.client) }}">
                   <i class="fa fa-home"></i>
                 </span>
 
@@ -76,11 +71,7 @@
 
             <div class="col-md-6">
               <div class="info-box">
-                <span class="info-box-icon" ng-class="{
-                        'bg-red': (Client.client.employment_status === 'None' || !Client.client.employment_status),
-                        'bg-yellow': (Client.client.employment_status === 'Part Time' || Client.client.employment_status === 'Seasonal'),
-                        'bg-green': Client.client.employment_status === 'Full Time'
-                }">
+                <span class="info-box-icon bg-{{ Client.getStatusColorForEmployment(Client.client) }}">
                   <i class="fa fa-flag-o"></i>
                 </span>
 

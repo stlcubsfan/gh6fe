@@ -9,6 +9,9 @@ angular
 function makeClients(clientsApi) {
     let vm = this;
 
+    vm.getClassForHousing = clientsApi.getStatusColorForHousing;
+    vm.getClassForEmployment = clientsApi.getStatusColorForEmployment;
+
     clientsApi.all().then(function (response) {
       vm.clients = response.data;
     });
