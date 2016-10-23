@@ -8,13 +8,6 @@ function reservationApi($http, restBaseApi, agencyApi) {
   });
   const baseApi = `${restBaseApi}/agencies`;
 
-  return {
-    all: getReservationsForAgency,
-    one: getReservation,
-    checkin: checkin,
-    create: createReservation
-  }
-
   function getReservationsForAgency(id) {
     id = id || currentAgency.id;
     return $http.get(`${baseApi}/${id}/reservations`);
@@ -28,7 +21,7 @@ function reservationApi($http, restBaseApi, agencyApi) {
   function checkin(agnecyId, clientId) {
     let reservation = {
      label: "Checked-In to Shelter",
-     recorded_by_id: null,
+     recorded_by_id: 2,
      client_id: clientId,
      notes: null,
      status: "CHECKEDIN"
@@ -37,7 +30,23 @@ function reservationApi($http, restBaseApi, agencyApi) {
     return $http.post(baseApi + '/' + agnecyId + '/reservations', reservation);
   }
 
-  function createReservation() {
+  function create(agencyId, clientId, number) {
+    let reservation = {
+      label: "Bed Reservation",
+      recorded_by_id: 2,
+      client_id: clientId,
+      number_in_party: number,
+      notes: null,
+      status: "HOLD"
+    }
 
+    return $http.post(`${baseApi}/${agencyId}/reservations`, reservation);
+  }
+
+  return {
+    all: getReservationsForAgency,
+    one: getReservation,
+    checkin: checkin,
+    create: create
   }
 }
