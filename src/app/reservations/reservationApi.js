@@ -23,6 +23,7 @@ function reservationApi($http, restBaseApi, agencyApi) {
      label: "Checked-In to Shelter",
      recorded_by_id: 2,
      client_id: clientId,
+     type: 'RESERVATION',
      number_in_party: number_in_party,
      notes: null,
      status: "CHECKEDIN"
@@ -31,12 +32,26 @@ function reservationApi($http, restBaseApi, agencyApi) {
     return $http.post(baseApi + '/' + agnecyId + '/reservations', reservation);
   }
 
+  function update(agencyId, reservation) {
+    let cleanReservation = {
+      id: reservation.id,
+      recorded_by_id: reservation.recorded_by_id,
+      client_id: reservation.client_id,
+      number_in_party: reservation.number_in_party,
+      notes: reservation.notes,
+      type: 'RESERVATION',
+      status: reservation.status
+    }
+    return $http.put(`${baseApi}/${agencyId}/reservations/${reservation.id}`, cleanReservation);
+  }
+
   function create(agencyId, clientId, number) {
     let reservation = {
       label: "Bed Reservation",
       recorded_by_id: 2,
       client_id: clientId,
       number_in_party: number,
+      type: 'RESERVATION',
       notes: null,
       status: "HOLD"
     }
@@ -47,6 +62,7 @@ function reservationApi($http, restBaseApi, agencyApi) {
   return {
     all: getReservationsForAgency,
     one: getReservation,
+    update: update,
     checkin: checkin,
     create: create
   }

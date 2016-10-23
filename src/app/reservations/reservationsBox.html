@@ -1,0 +1,12 @@
+<div class="col-md-6">
+  <div id="reservations-box" class="info-box" ui-sref="manageReservations()" ng-class="{'bg-green': reservationsBox.openReservations.length === 0, 'bg-red': reservationsBox.openReservations.length > 0}">
+    <span class="info-box-icon"><i class="fa fa-book"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Reservation Requests</span>
+      <span class="info-box-number">{{reservationsBox.reservations.length}} <small>Today</small></span>
+      <span class="info-box-number">{{reservationsBox.openReservations.length}} <small>Open</small></span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+</div>

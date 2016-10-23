@@ -1,0 +1,42 @@
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Manage Reservations
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="rowf flex-body">
+        <div class="col-md-12">
+          <div class="box" ng-repeat="reservation in reservationMgmt.reservations | orderBy:['-status', 'id']">
+            <div class="box-header with-border">
+              <h3 class="box-title">
+                {{ reservation.client.full_name }}
+              </h3>
+              <span class="pull-right">Time reserved: {{ reservation.happened_on | date:'shortTime' }}</span>
+            </div>
+            <div class="box-body reservation-container">
+              <div class="reservation-info">
+                Beds reserved: {{ reservation.number_in_party }}
+              </div>
+              <div class="reservation-actions">
+                <button ng-if="reservation.status === 'HOLD'" type="button" class="btn btn-block btn-primary" ng-click="reservationMgmt.checkInExistingReservation(reservation)">Check-In Client</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-class="{'control-sidebar-open': reservationMgmt.selectedReservation !== undefined}" class="flex-body-sidebar">
+          <aside id="sidebar" class="check-in-sidebar control-sidebar control-sidebar-dark">
+            <div class="close-sidebar">
+              <i class="fa fa-times" style="color: white; cursor: pointer" ng-click="reserveBed.resetSelectedReservation()"></i>
+            </div>
+            <check-in></check-in>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
