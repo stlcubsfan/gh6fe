@@ -22,7 +22,8 @@
             <div class="box-body box-profile">
                 <h3 class="profile-username text-center">{{Client.client.first_name}} {{Client.client.last_name}}</h3>
                 <p class="text-muted text-center">SSN: {{Client.client.ssn }}</p>
-                <p class="text-muted text-center">DOB: {{Client.client.dob | date: shortDate}}
+                <p class="text-muted text-center">DOB: {{Client.client.dob | date: shortDate}}</p>
+                <p class="text-muted text-center">Viability: {{Client.clientHealthViability}}</p>
             </div>
           </div>
 
