@@ -15,7 +15,7 @@
     <section class="content">
       <br><br>
 
-      <div class="row">
+      <div class="row" ng-if="!Dashboard.isLoading">
         <div class="col-md-8">
           <ng-include src="'app/dashboard/dashboard-boxes.html'"></ng-include>
 

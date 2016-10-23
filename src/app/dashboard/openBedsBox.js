@@ -9,8 +9,10 @@ angular
     }
   });
 
-function openBedsCtrl($stateParams, agencyApi, nearMeMiles) {
+function openBedsCtrl($stateParams, $scope, agencyApi, nearMeMiles) {
   const vm = this;
+
+  $scope.$on('checkin-made', onCheckinMade);
 
   vm.$onInit = () => {
     vm.totalBedsNearMe = null;
@@ -47,5 +49,11 @@ function openBedsCtrl($stateParams, agencyApi, nearMeMiles) {
       return prev + curr;
     }, 0);
     return result;
+  }
+
+
+  function onCheckinMade(event, args) {
+    vm.currentAgency.beds_available -= args.bedCount;
+    vm.totalBeds = vm.currentAgency.beds_available;
   }
 }
