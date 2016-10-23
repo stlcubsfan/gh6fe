@@ -60,4 +60,10 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/manageReservations',
       component: 'manageReservations'
     });
+
+  $stateProvider
+    .state('agencyHealth', {
+      url: '/agency-health',
+      component: 'agencyHealth'
+    });
 }
