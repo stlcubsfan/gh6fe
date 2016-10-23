@@ -37,7 +37,7 @@ function openBedsCtrl($stateParams, $scope, agencyApi, nearMeMiles) {
       return '0%';
     }
 
-    const total = parseInt(vm.currentAgency.beds_available);
+    const total = parseInt(vm.currentAgency.total_beds_available);
     const reserved = parseInt(vm.currentAgency.reservation_count);
     return (reserved / total * 100) + '%'
   }
