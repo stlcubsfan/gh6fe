@@ -6,7 +6,7 @@ angular
     controllerAs: 'CheckIn'
   });
 
-function makecheckIn($rootScope, clientsApi, reservationApi, agencyApi) {
+function makecheckIn($rootScope, clientsApi, reservationApi, agencyApi, $location) {
     let vm = this;
 
     vm.newCheckIn = {};
@@ -48,6 +48,7 @@ function makecheckIn($rootScope, clientsApi, reservationApi, agencyApi) {
       return agencyApi.getCurrent().then(agencyResponse => {
         return reservationApi.checkin(agencyResponse.id, vm.newCheckinClient.id, vm.newCheckIn.bedsNeeded).then(reservationResponse => {
           broadcastCheckinMade(vm.newCheckIn.bedsNeeded);
+          $location.path('/manageReservations');
         });
       });
     };
