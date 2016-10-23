@@ -34,7 +34,10 @@ function clientsApi($http) {
     }
 
     function getStatusColorForHousing(client) {
-      let status = client.housing_status;
+      if (!client) {
+        return;
+      }
+      let status = client.housing_status || 'Homeless';
 
       if (!status || status === 'Homeless') {
         return 'red';
@@ -46,7 +49,11 @@ function clientsApi($http) {
     }
 
     function getStatusColorForEmployment(client) {
-      let status = client.employment_status;
+      if (!client) {
+        return;
+      }
+
+      let status = client.employment_status || 'None';
 
       if (!status || status === 'None') {
         return 'red';

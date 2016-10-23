@@ -4,12 +4,6 @@
       <h1>
         Client Profile
       </h1>
-
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
     </section>
 
     <!-- Main content -->
@@ -23,7 +17,9 @@
                 <h3 class="profile-username text-center">{{Client.client.first_name}} {{Client.client.last_name}}</h3>
                 <p class="text-muted text-center">SSN: {{Client.client.ssn }}</p>
                 <p class="text-muted text-center">DOB: {{Client.client.dob | date: shortDate}}</p>
-                <p class="text-muted text-center">Viability: {{Client.clientHealthViability}}</p>
+                <h3 style="display: block;" class="label text-muted text-center" ng-class="{'bg-green': Client.clientHealthViability >= 90, 'bg-yellow': Client.clientHealthViability < 90 && Client.clientHealthViability >= 70, 'bg-red': Client.clientHealthViability < 70}">
+                  Viability: {{Client.clientHealthViability}}
+                </h3>
             </div>
           </div>
 
@@ -40,7 +36,7 @@
                   <hr>
                   <strong>Ethnicity</strong>
                   <p class="text-muted">
-                      <ul>
+                      <ul class='ethnicities-list'>
                           <li ng-show="Client.client.american_indian">American Indian</li>
                           <li ng-show="Client.client.asian">Asian</li>
                           <li ng-show="Client.client.black">Black</li>
