@@ -14,14 +14,56 @@ function clientDetail($stateParams, clientsApi,
     const cd = this;
     cd.clientHealthViability = 100;
 
-    var vm = this;
 
-    vm.getStatusColorForEmployment = clientsApi.getStatusColorForEmployment;
-    vm.getStatusColorForHousing = clientsApi.getStatusColorForHousing;
+    cd.getStatusColorForEmployment = clientsApi.getStatusColorForEmployment;
+    cd.getStatusColorForHousing = clientsApi.getStatusColorForHousing;
+
+    function edit(id) {
+        cd.idEditing = id;
+    }
+
+    function editing(id) {
+        return cd.idEditing === id;
+    }
+
+    function cancelEdit() {
+        cd.idEditing = null;
+    }
+
+    function updateEmployment(emp) {
+        clientEducationEmploymentsApi.update(emp).then(function(res) {
+            //recalculateViability();
+            cd.clientHealthViability = 100;
+            emp = res.data;
+            hydrateEmp(emp);
+            cd.idEditing = null;
+            init();
+        });
+    }
+
+    cd.edit = edit;
+    cd.editing = editing;
+    cd.cancelEdit = cancelEdit;
+    cd.updateEmployment = updateEmployment;
 
     init();
 
     function init() {
+        educationLevelsApi.all().then(levels => {
+            cd.allEducationLevels = levels.data;
+        });
+        schoolStatusesApi.all().then(levels => {
+            cd.allSchoolStatuses = levels.data;
+        });
+        employmentTypesApi.all().then(levels => {
+            cd.allEmploymentTypes = levels.data;
+        });
+        notEmployedReasonsApi.all().then(levels => {
+            cd.allNotEmployedReasonTypes = levels.data;
+        });
+
+
+
         clientsApi.one($stateParams.clientId).then(function (c) {
             cd.client = c.data;
             clientDisabilitiesApi.all(cd.client.id).then(function (cds) {
@@ -128,6 +170,27 @@ function clientDetail($stateParams, clientsApi,
 
         disabilitiesApi.all().then(function (response) {
             cd.disabilities = response.data;
+        });
+    }
+
+    function recalculateViability() {
+
+    }
+
+    function hydrateEmp(ce) {
+        educationLevelsApi.one(ce.educationlevelid).then(function (res) {
+            ce.educationLevel = res.data.name;
+        });
+        schoolStatusesApi.one(ce.schoolstatusid).then(function (res) {
+            ce.schoolStatus = res.data.name;
+        });
+
+        employmentTypesApi.one(ce.employmenttypeid).then(function (res) {
+            ce.employmentType = res.data.name;
+
+        });
+        notEmployedReasonsApi.one(ce.notemployedreasonid).then(function (res) {
+            ce.notEmployedReason = res.data.name;
         });
     }
 }

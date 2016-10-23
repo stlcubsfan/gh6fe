@@ -10,7 +10,7 @@
     <section class="content">
 
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <div class="box box-primary">
 
             <div class="box-body box-profile">
@@ -48,7 +48,7 @@
               </div>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="row">
             <div class="col-md-6">
               <div class="info-box">
@@ -93,11 +93,70 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="cdis in Client.clientEducationEmployment">
-                        <td>{{cdis.educationLevel}}</td>
-                        <td>{{cdis.schoolStatus}}</td>
-                        <td>{{cdis.employmentType}}</td>
-                        <td>{{cdis.notEmployedReason}}</td>
+                        <td ng-hide="Client.editing(cdis.id)">{{cdis.educationLevel}}</td>
+                        <td ng-show="Client.editing(cdis.id)">
+                          <ui-select ng-model="cdis.educationlevelid"
+                                    theme="select2"
+                                    reset-search-input="false"
+                                    append-to-body="true" id="educationLevel">
+
+                            <ui-select-match placeholder="Something...">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="educationLevel.id as educationLevel in Client.allEducationLevels | filter: $select.search">
+
+                              <div ng-bind-html="educationLevel.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </td>
+                        <td ng-hide="Client.editing(cdis.id)">{{cdis.schoolStatus}}</td>
+                        <td ng-show="Client.editing(cdis.id)">
+                          <ui-select ng-model="cdis.schoolstatusid"
+                                    theme="select2"
+                                    reset-search-input="false"
+                                    append-to-body="true" id="schoolStatus">
+
+                            <ui-select-match placeholder="Something...">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="schoolStatus.id as schoolStatus in Client.allSchoolStatuses | filter: $select.search">
+
+                              <div ng-bind-html="schoolStatus.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </td>                        
+                        <td ng-hide="Client.editing(cdis.id)">{{cdis.employmentType}}</td>
+                        <td ng-show="Client.editing(cdis.id)">
+                          <ui-select ng-model="cdis.employmenttypeid"
+                                    theme="select2"
+                                    reset-search-input="false"
+                                    append-to-body="true" id="employmentType">
+
+                            <ui-select-match placeholder="Something...">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="employmentType.id as employmentType in Client.allEmploymentTypes | filter: $select.search">
+
+                              <div ng-bind-html="employmentType.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </td>                         
+                        <td ng-hide="Client.editing(cdis.id)">{{cdis.notEmployedReason}}</td>
+                        <td ng-show="Client.editing(cdis.id)">
+                          <ui-select ng-model="cdis.notemployedreasonid"
+                                    theme="select2"
+                                    reset-search-input="false"
+                                    append-to-body="true" id="reasonNotEmployed">
+
+                            <ui-select-match placeholder="Something...">{{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="notEmployedReasonType.id as notEmployedReasonType in Client.allNotEmployedReasonTypes | filter: $select.search">
+
+                              <div ng-bind-html="notEmployedReasonType.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                          </ui-select>
+                        </td>                         
                         <td>{{cdis.creation_date | date: shortDate}}</td>
+                        <td ng-hide="Client.editing(cdis.id)">
+                          <button class="btn btn-xs btn-primary" ng-click="Client.edit(cdis.id)">Edit</button>
+                        </td>
+                        <td ng-show="Client.editing(cdis.id)">
+                          <button class="btn btn-xs btn-primary" ng-click="Client.updateEmployment(cdis)">Save</button>
+                          <a ng-click="Client.cancelEdit()">Cancel</a>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
