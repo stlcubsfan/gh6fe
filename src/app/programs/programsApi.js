@@ -2,21 +2,19 @@ angular
   .module('app')
   .factory('programsApi', makeProgramsApi);
 
-function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories, clientsApi) {
+function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories, clientsApi, agencyApi) {
     let programsApi = {};
-
+    let baseApi = 'http://gh6api.herokuapp.com/agencies/';
     programsApi.getPrograms = function () {
-        return $q.when({
-            data: dummyPrograms.programs
+        return agencyApi.getCurrent().then(agency => {
+            return $http.get(baseApi + agency.id + '/programs');
         });
     };
 
     programsApi.getProgram = function (id) {
-        return programsApi.getPrograms().then(function (response) {
-            return {
-                data: _.find(response.data, {id: parseInt(id)})
-            }
-        });
+        return agencyApi.getCurrent().then(agency => {
+            return $http.get(baseApi + agency.id + '/programs/' + id);
+        })
     };
 
     programsApi.getCategories = function (id) {
@@ -26,7 +24,9 @@ function makeProgramsApi($http, $q, dummyPrograms, dummyProgramCategories, clien
     };
 
     programsApi.getClientsForProgram = function (programId) {
-        return clientsApi.all();
+        return agencyApi.getCurrent().then(agency => {
+            return $http.get(baseApi + agency.id + '/programs/' + programId + '/clients');
+        });
     };
 
 
