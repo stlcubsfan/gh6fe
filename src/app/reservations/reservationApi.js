@@ -25,11 +25,12 @@ function reservationApi($http, restBaseApi, agencyApi) {
     return $http.get(`${baseApi}/${agencyId}/reservations/${reservationId}`);
   }
 
-  function checkin(agnecyId, clientId) {
+  function checkin(agnecyId, clientId, number_in_party) {
     let reservation = {
      label: "Checked-In to Shelter",
      recorded_by_id: null,
      client_id: clientId,
+     number_in_party: number_in_party,
      notes: null,
      status: "CHECKEDIN"
     }

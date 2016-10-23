@@ -42,8 +42,12 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
       }
     ];
 
-    vm.checkInExistingClient = function (clientId) {
-
+    vm.checkInExistingClient = function () {
+      return agencyApi.getCurrent().then(agencyResponse => {
+        return reservationApi.checkin(agencyResponse.id, vm.newCheckinClient.id, vm.newCheckIn.bedsNeeded).then(reservationResponse => {
+          console.log(reservationResponse);
+        });
+      });
     };
 
     vm.createClient = function () {
@@ -56,7 +60,7 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
 
       return agencyApi.getCurrent().then(agencyResponse => {
         return clientsApi.create(vm.newCheckIn).then((clientResponse) => {
-          return reservationApi.checkin(agencyResponse.id, clientResponse.data.id).then(reservationResponse => {
+          return reservationApi.checkin(agencyResponse.id, clientResponse.data.id, vm.newCheckIn.bedsNeeded).then(reservationResponse => {
             console.log(reservationResponse);
           })
         })
