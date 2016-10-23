@@ -2,7 +2,7 @@ angular
   .module('app')
   .controller('sidebar', makeSidebar);
 
-function makeSidebar(agencyApi) {
+function makeSidebar(agencyApi, $rootScope) {
     const vm = this;
 
     vm.setCurrenctAgency = setCurrenctAgency;
@@ -23,5 +23,6 @@ function makeSidebar(agencyApi) {
     function setCurrenctAgency(agency) {
       agencyApi.setCurrent(agency.id);
       vm.currentAgency = agency;
+      $rootScope.$broadcast('agency-updated', {newAgency: agency});
     }
 }

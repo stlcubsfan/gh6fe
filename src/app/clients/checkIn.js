@@ -6,7 +6,7 @@ angular
     controllerAs: 'CheckIn'
   });
 
-function makecheckIn(clientsApi, reservationApi, agencyApi) {
+function makecheckIn($rootScope, clientsApi, reservationApi, agencyApi) {
     let vm = this;
 
     vm.newCheckIn = {};
@@ -43,14 +43,18 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
     ];
 
     vm.checkInExistingClient = function () {
+      vm.isCheckingIn = true;
+
       return agencyApi.getCurrent().then(agencyResponse => {
         return reservationApi.checkin(agencyResponse.id, vm.newCheckinClient.id, vm.newCheckIn.bedsNeeded).then(reservationResponse => {
-          console.log(reservationResponse);
+          broadcastCheckinMade(vm.newCheckIn.bedsNeeded);
         });
       });
     };
 
     vm.createClient = function () {
+      vm.isCheckingIn = true;
+
       if (vm.ethnicitySelections) {
         vm.ethnicitySelections.forEach(selctionTitle => {
           let target = _.find(vm.availableEthnicities, {title: selctionTitle});
@@ -61,10 +65,18 @@ function makecheckIn(clientsApi, reservationApi, agencyApi) {
       return agencyApi.getCurrent().then(agencyResponse => {
         return clientsApi.create(vm.newCheckIn).then((clientResponse) => {
           return reservationApi.checkin(agencyResponse.id, clientResponse.data.id, vm.newCheckIn.bedsNeeded).then(reservationResponse => {
-            console.log(reservationResponse);
+            broadcastCheckinMade(vm.newCheckIn.bedsNeeded);
           })
         })
       })
     };
+
+    function broadcastCheckinMade(bedCount) {
+      vm.isCheckingIn = false;
+      vm.newCheckIn = '';
+      vm.newCheckinClient = '';
+
+      $rootScope.$broadcast('checkin-made', {bedCount: bedCount});
+    }
 
 }
