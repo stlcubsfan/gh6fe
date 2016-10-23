@@ -13,7 +13,7 @@
         <div class="progress-bar" ng-style="{ width: openBeds.calcProgress() }"></div>
       </div>
           <span class="progress-description">
-            <a ng-if="openBeds.totalBedsNearMe !== null" href="#">{{openBeds.totalBedsNearMe}} Nearby</a>
+            <a class="nearby-bed-count" ng-if="openBeds.totalBedsNearMe !== null" href="#">{{openBeds.totalBedsNearMe}} Nearby</a>
             <span ng-if="openBeds.totalBedsNearMe === null"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Searching for beds nearby...</span>
           </span>
     </div>

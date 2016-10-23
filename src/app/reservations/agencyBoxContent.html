@@ -1,0 +1,14 @@
+<div class="box-header with-border">
+  <h3 class="box-title">
+    {{ agency.name }}
+    <span class="pull-right">Available beds: {{ agency.beds_available }}</span>
+  </h3>
+</div>
+<div class="box-body agency-container">
+  <div class="agency-info">
+    Distance: {{ agency.distance }} miles away: {{ agency.address1 }} {{ agency.address2 }} {{ agency.city }}, {{ agency.state }} {{ agency.zip }}
+  </div>
+  <div class="reservation-actions">
+    <button type="button" class="btn btn-block btn-primary"  ng-click="reserveBed.selectAgency(agency)">Reserve Beds Here</button>
+  </div>
+</div>
