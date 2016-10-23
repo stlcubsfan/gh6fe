@@ -6,12 +6,14 @@ angular
     controllerAs: 'AgencyHealth'
   });
 
-function makeagencyHealth() {
+function makeagencyHealth(agencyApi) {
     const vm = this;
 
     init();
 
     function init() {
-
+      agencyApi.getKeyIndicators().then(kis => {
+        vm.keyIndicators = kis.data;
+      });
     }
 }
