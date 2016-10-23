@@ -9,7 +9,7 @@ angular
 function makeHome(chartDemo, agencyApi) {
     const vm = this;
 
-    init()
+    init();
 
     function init() {
       vm.chartConfig = chartDemo;
