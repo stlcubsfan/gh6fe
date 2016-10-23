@@ -14,9 +14,16 @@ function agencyApi($http, restBaseApi) {
         getAgenciesNearMe: getAgenciesNearMe
     }
 
-    function getAgencies() {
-        // todo: if we update agencies, we'll need to clear the cache
-        return $http.get(baseApi, {cache: true});
+    function getAgencies(shouldBustCache) {
+        let cacheObj = {
+            cache: true
+        };
+
+        if (shouldBustCache) {
+            cacheObj.cache = false;
+        }
+
+        return $http.get(baseApi, cacheObj);
     }
 
     function getAgency(id) {
@@ -27,10 +34,10 @@ function agencyApi($http, restBaseApi) {
         window.localStorage[STORAGE_KEY] = id;
     }
 
-    function getCurrent() {
+    function getCurrent(shouldBustCache) {
         let current = window.localStorage[STORAGE_KEY];
 
-        return getAgencies().then(function (response) {
+        return getAgencies(shouldBustCache).then(function (response) {
             if (!current) {
                 current = 1;
             }
