@@ -7,30 +7,35 @@
     </ol>
   </section>
   <section class="content">
-    <div class="row">
-      <div class="col-md-12">
-        <ui-gmap-google-map ng-if="reserveBed.mapConfig.center" center='reserveBed.mapConfig.center' zoom='reserveBed.mapConfig.zoom'></ui-gmap-google-map>
-      </div>
-    </div>
     <div class="row flex-body">
       <div class="col-md-12 flex-body-main">
+        <ui-gmap-google-map style="padding-bottom: 2rem; display: block;" ng-if="reserveBed.mapConfig.center" center='reserveBed.mapConfig.center' zoom='reserveBed.mapConfig.zoom'>
+          <ui-gmap-markers click="reserveBed.openMapDialog(instance, e, marker)" models="reserveBed.mapConfig.markers" coords="'self'" icon="'icon'">
+            <ui-gmap-windows show="show">
+              <div ng-non-bindable>
+                <div class="box-header with-border">
+                  <h3 class="box-title">
+                    {{ agency.name }}
+                    <span class="pull-right">Available beds: {{ agency.beds_available }}</span>
+                  </h3>
+                </div>
+                <div class="box-body agency-container">
+                  <div class="agency-info">
+                    Distance: {{ agency.distance }} miles away: {{ agency.address1 }} {{ agency.address2 }} {{ agency.city }}, {{ agency.state }} {{ agency.zip }}
+                  </div>
+                  <div class="reservation-actions">
+                    <button id="agency-{{agency.id}}" type="button" class="btn btn-block btn-primary" onclick="window.mapWindowButtonClicked(event)">Reserve Beds Here</button>
+                  </div>
+                </div>
+              </div>
+            </ui-gmap-windows>
+          </ui-gmap-markers>
+        </ui-gmap-google-map>
         <div class="box" ng-repeat="agency in reserveBed.agenciesNearby | orderBy:'distance'">
-          <div class="box-header with-border">
-            <h3 class="box-title">
-              {{ agency.name }}
-              <span class="pull-right">Available beds: {{ agency.beds_available }}</span>
-          </div>
-          <div class="box-body agency-container">
-            <div class="agency-info">
-              Distance: {{ agency.distance }} miles away: {{ agency.address1 }} {{ agency.address2 }} {{ agency.city }}, {{ agency.state }} {{ agency.zip }}
-            </div>
-            <div class="reservation-actions">
-              <button type="button" class="btn btn-block btn-primary"  ng-click="reserveBed.selectAgency(agency)">Reserve Beds Here</button>
-            </div>
-          </div>
+          <ng-include src="'app/reservations/agencyBoxContent.html'"></ng-include>
         </div>
       </div>
-      <div ng-if="reserveBed.selectedAgency !== undefined" class="flex-body-sidebar">
+      <div ng-class="{'control-sidebar-open': reserveBed.selectedAgency !== undefined}" class="flex-body-sidebar">
         <aside id="sidebar" class="control-sidebar control-sidebar-dark">
           <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li class="" ng-click="reserveBed.sidebarTab = 1" ng-class="{'active': reserveBed.sidebarTab === 1}">
@@ -44,6 +49,7 @@
             <div class="tab-pane" ng-class="{'active': reserveBed.sidebarTab === 1}">
               <h4 class="control-sidebar-heading">
                 <strong style="white-space: nowrap; overlay: hidden; text-overflow: ellipsis;">{{reserveBed.selectedAgency.name}}</strong>
+                <i class="fa fa-times pull-right" style="cursor: pointer" ng-click="reserveBed.resetSelectingAgency()"></i>
                 <br/>
                 Reserve Beds
               </h4>
@@ -79,13 +85,13 @@
               <div class="form-group" ng-if="reserveBed.selectedAgency.reservations.length === 0">
                 <h4 style="text-align: center;" class="control-sidebar-heading">No reservations yet</h4>
               </div>
-              <div class="form-group" ng-repeat="reservation in reserveBed.selectedAgency.reservations">
+              <div class="form-group list-of-reservations" ng-repeat="reservation in reserveBed.selectedAgency.reservations">
                 <div class="box">
                   <div class="box-header with-border">
                     <h3 class="box-title">
                       {{reservation.client.full_name}}
-                      <span class="pull-right"><i class="fa fa-edit"></i> Edit</span>
                     </h3>
+                    <button type="button" class="btn btn-block btn-success pull-right"><i class="fa fa-edit"></i> Edit</button>
                   </div>
                 </div>
               </div>
